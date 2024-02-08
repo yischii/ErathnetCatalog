@@ -1,12 +1,12 @@
 groups:
-  - name: "network"
+  - name: "Network"
     description: "Network configuration for DHCP server"
 
 questions:
   - variable: network
     label: "Network interface for DHCP server"
     description: "Select the network interface for DHCP server to listen on"
-    group: "network"
+    group: "Network"
     schema:
       type: string
       required: true
