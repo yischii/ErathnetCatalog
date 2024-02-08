@@ -44,6 +44,25 @@
                     "description": "DHCP is able to use raw sockets."
                 }
             ]
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Information",
+                    "description": "ISC-DHCP-Server"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "Information",
+                    "label": "ISC-DHCP-Server",
+                    "description": "",
+                    "group": "Information",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ]
         }
     }
 }

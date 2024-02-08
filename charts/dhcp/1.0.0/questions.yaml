@@ -1,0 +1,11 @@
+groups:
+  - name: "Information"
+    description: "ISC-DHCP-Server"
+
+questions:
+  - variable: Information
+    label: "ISC-DHCP-Server"
+    description: ""
+    group: "NInformation"
+    schema:
+      type: string
