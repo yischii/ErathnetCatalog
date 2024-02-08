@@ -6,7 +6,7 @@ questions:
   - variable: network
     label: "Network interface for DHCP server"
     description: "Select the network interface for DHCP server to listen on"
-    group: "Network"
+    group: "network"
     schema:
       type: string
       required: true
