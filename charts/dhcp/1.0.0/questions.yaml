@@ -6,6 +6,6 @@ questions:
   - variable: Information
     label: "ISC-DHCP-Server"
     description: ""
-    group: "NInformation"
+    group: "Information"
     schema:
       type: string
