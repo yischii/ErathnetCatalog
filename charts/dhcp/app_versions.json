@@ -3,7 +3,7 @@
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/dhcp/1.0.0",
+        "location": "/__w/charts/dhcp/1.0.0",
         "last_update": "2024-01-20 18:00:00",
         "required_features": [],
         "human_version": "2024.1.20_1.0.0",
