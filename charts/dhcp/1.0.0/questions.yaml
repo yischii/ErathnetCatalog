@@ -1,11 +1,14 @@
 groups:
-  - name: "Information"
-    description: "ISC-DHCP-Server"
+  - name: "Networking"
+    description: "Networking configuration for DHCP server"
 
 questions:
-  - variable: Information
-    label: "ISC-DHCP-Server"
-    description: ""
-    group: "Information"
+  - variable: network
+    label: "Network for DHCP server"
+    description: "Configure the network for DHCP server"
+    group: "Networking"
     schema:
       type: string
+      required: true
+      $ref:
+        - "definitions/interface"

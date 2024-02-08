@@ -3,7 +3,7 @@
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/dhcp/1.0.0",
+        "location": "/__w/dhcp/1.0.0",
         "last_update": "2024-01-20 18:00:00",
         "required_features": [],
         "human_version": "2024.1.20_1.0.0",
@@ -33,33 +33,26 @@
                 "dhcp"
             ]
         },
-        "app_metadata": {
-                "capabilities": [
-                {
-                    "name": "NET_BIND_SERVICE",
-                    "description": "DHCP is able to bind to privileged ports."
-                },
-                {
-                    "name": "NET_RAW",
-                    "description": "DHCP is able to use raw sockets."
-                }
-            ]
-        },
+        "app_metadata": {},
         "schema": {
             "groups": [
                 {
-                    "name": "Information",
-                    "description": "ISC-DHCP-Server"
+                    "name": "Networking",
+                    "description": "Networking configuration for DHCP server"
                 }
             ],
             "questions": [
                 {
-                    "variable": "Information",
-                    "label": "ISC-DHCP-Server",
-                    "description": "",
-                    "group": "Information",
+                    "variable": "network",
+                    "label": "Network for DHCP server",
+                    "description": "Configure the network for DHCP server",
+                    "group": "Networking",
                     "schema": {
-                        "type": "string"
+                        "type": "string",
+                        "required": "true",
+                        "$ref": [
+                            "definitions/interface"
+                        ]
                     }
                 }
             ]
