@@ -1,0 +1,118 @@
+{
+    "1.0.0": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/__w/charts/charts/charts/dhcp/1.0.0",
+        "last_update": "2024-01-20 18:00:00",
+        "required_features": [],
+        "human_version": "2024.1.20_1.0.0",
+        "version": "1.0.0",
+        "chart_metadata": {
+            "name": "dhcp",
+            "description": "DHCP Server App for TrueNAS SCALE",
+            "annotations": {
+                "title": "DHCP"
+            },
+            "type": "application",
+            "version": "1.0.0",
+            "apiVersion": "v2",
+            "appVersion": "2024.1.20",
+            "kubeVersion": ">=1.16.0-0",
+            "maintainers": [
+                {
+                    "name": "Erathnet",
+                    "url": "https://www.erathnet.de/",
+                    "email": "administrator@erathnet.de"
+                }
+            ],
+            "home": "",
+            "icon": "",
+            "sources": [],
+            "keywords": [
+                "dhcp"
+            ]
+        },
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "userName": "root",
+                    "groupName": "root",
+                    "gid": 0,
+                    "uid": 0,
+                    "description": "DHCP runs as root user."
+                }
+            ],
+            "capabilities": [
+                {
+                    "name": "NET_BIND_SERVICE",
+                    "description": "DHCP is able to bind to privileged ports."
+                },
+                {
+                    "name": "NET_RAW",
+                    "description": "DHCP is able to use raw sockets."
+                }
+            ],
+            "hostMounts": []
+        },
+        "schema": {
+            "groups": [
+                {
+                    "name": "Networking",
+                    "description": "Networking configuration for DHCP server"
+                },
+                {
+                    "name": "Storage",
+                    "description": "Storage configuration for DHCP server"
+                }
+            ],
+            "questions": [
+                {
+                    "variable": "network",
+                    "label": "Network for DHCP server",
+                    "description": "Configure the network for DHCP server",
+                    "group": "Networking",
+                    "schema": {
+                        "type": "string",
+                        "required": "true",
+                        "$ref": [
+                            "definitions/interface"
+                        ]
+                    }
+                },
+                {
+                    "variable": "storage",
+                    "label": "Storage for DHCP server",
+                    "description": "Configure the storage device for DHCP server",
+                    "group": "Storage",
+                    "schema": {
+                        "type": "dict",
+                        "$ref": [
+                            "normalize/ixVolume"
+                        ],
+                        "attrs": [
+                            {
+                                "variable": "mountPath",
+                                "label": "Mount Path",
+                                "description": "Path where the volume will be mounted inside the pod",
+                                "schema": {
+                                    "type": "path",
+                                    "required": "true"
+                                }
+                            },
+                            {
+                                "variable": "datasetName",
+                                "label": "Dataset Name",
+                                "schema": {
+                                    "type": "string",
+                                    "required": "true"
+                                }
+                            }
+
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
