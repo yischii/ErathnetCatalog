@@ -3,7 +3,7 @@
         "dhcp": {
             "app_readme": "DHCP Server",
             "categories": [
-                "networking"
+                "network"
             ],
             "description": "ISC-DHCP-Server",
             "healthy": true,
