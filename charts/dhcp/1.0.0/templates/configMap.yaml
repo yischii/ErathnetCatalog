@@ -64,7 +64,7 @@ data:
     # DHCP server to understand the network topology.
     # Server subnet
     #Test
-    subnet 10.1.0.0 netmask 255.255.255.0 {
+    subnet 172.29.240.1 netmask 255.255.255.0 {
     }
 
     # VLAN 10
