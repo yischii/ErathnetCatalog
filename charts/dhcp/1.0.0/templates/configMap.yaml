@@ -5,6 +5,11 @@ metadata:
   labels:
     {{- include "dhcp.labels" . | nindent 4 }}
 data:
+  ddns.key: |
+    key ddns-update {
+        algorithm HMAC-MD5.SIG-ALG.REG.INT;
+        secret "Dm690ouX47i2+yW4z72sVQ==";
+    };
   dhcpd.conf: |
     #
     # Sample configuration file for ISC dhcpd for Debian
@@ -569,8 +574,3 @@ data:
     #    range 10.0.29.10 10.0.29.230;
     #  }
     #}
-  ddns.key: |
-    key ddns-update {
-        algorithm HMAC-MD5.SIG-ALG.REG.INT;
-        secret "Dm690ouX47i2+yW4z72sVQ==";
-    };

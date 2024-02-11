@@ -3,20 +3,16 @@
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/dhcp/1.0.0",
+        "location": "/__w/charts/dns/1.0.0",
         "last_update": "2024-01-20 18:00:00",
         "required_features": [],
         "human_version": "2024.1.20_1.0.0",
         "version": "1.0.0",
         "chart_metadata": {
-            "name": "dhcp",
-            "description": "DHCP Server App for TrueNAS SCALE",
+            "name": "dns",
+            "description": "dns Server App for TrueNAS SCALE",
             "annotations": {
-                "Release": "Stable",
-                "Environment": "Production",
-                "Tier": "Backend",
-                "Service": "DHCP",
-                "App": "ISC-DHCP-Server"
+                "title": "DNS"
             },
             "type": "application",
             "version": "1.0.0",
@@ -34,7 +30,7 @@
             "icon": "",
             "sources": [],
             "keywords": [
-                "dhcp"
+                "dns"
             ]
         },
         "app_metadata": {},
@@ -42,14 +38,14 @@
             "groups": [
                 {
                     "name": "Network",
-                    "description": "Network configuration for DHCP server"
+                    "description": "Network configuration for DNS server"
                 }
             ],
             "questions": [
                 {
                     "variable": "network",
-                    "label": "Network interface for DHCP server",
-                    "description": "Select the network interface for DHCP server to listen on",
+                    "label": "Network interface for DNS server",
+                    "description": "Select the network interface for DNS server to listen on",
                     "group": "Network",
                     "schema": {
                         "type": "string",

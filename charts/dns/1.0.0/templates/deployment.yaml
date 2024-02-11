@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dhcp.fullname" . }}
+  name: {{ include "dns.fullname" . }}
   labels:
-    {{- include "dhcp.labels" . | nindent 4 }}
+    {{- include "dns.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "dhcp.selectorLabels" . | nindent 6 }}
+      {{- include "dns.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "dhcp.labels" . | nindent 8 }}
+        {{- include "dns.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -32,19 +32,20 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: {{ .Values.env.name }}
-              value: {{ .Values.network }}
           ports:
-            - containerPort: {{ .Values.service.port }}
-              protocol: {{ .Values.service.protocol }}
+            - name: dnsTCP
+              containerPort: {{ .Values.service.port }}
+              protocol: {{ .Values.service.protocolTCP }}
+            - name: dnsUDP
+              containerPort: {{ .Values.service.port }}
+              protocol: {{ .Values.service.protocolUDP }}
           volumeMounts:
-            - name: {{ include "dhcp.fullname" . }}-configMap
-              mountPath: "/{{ include "dhcp.fullname" . }}_conf"
+            - name: {{ include "dns.fullname" . }}-configMap
+              mountPath: "/{{ include "dns.fullname" . }}_conf"
               {{- with .Values.volumeMounts }}
               {{- toYaml . | nindent 14 }}
               {{- end }}
       volumes:
-        - name: {{ include "dhcp.fullname" . }}-configMap
+        - name: {{ include "dns.fullname" . }}-configMap
           configMap:
-            name: {{ include "dhcp.fullname" . }}
+            name: {{ include "dns.fullname" . }}
