@@ -15,8 +15,6 @@ questions:
       $ref:
         - "definitions/interface"
   - variable: volume
-    label: "Data storage volume for DNS server"
-    description: "Select the data storage volume for DNS server"
     group: "Storage"
     schema:
       type: dict
