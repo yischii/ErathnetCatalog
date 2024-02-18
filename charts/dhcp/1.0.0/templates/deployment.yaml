@@ -30,21 +30,23 @@ spec:
       hostNetwork: true
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: {{ .Values.env.name }}
               value: {{ .Values.network }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocol }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: {{ include "dhcp.fullname" . }}-configMap
+            - name: {{ include "dhcp.fullname" . }}-configmap
               mountPath: "/{{ include "dhcp.fullname" . }}_conf"
               {{- with .Values.volumeMounts }}
               {{- toYaml . | nindent 14 }}
               {{- end }}
       volumes:
-        - name: {{ include "dhcp.fullname" . }}-configMap
+        - name: {{ include "dhcp.fullname" . }}-configmap
           configMap:
-            name: {{ include "dhcp.fullname" . }}
+            name: {{ include "dhcp.fullname" . }}-conf

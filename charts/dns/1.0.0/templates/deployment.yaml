@@ -33,19 +33,21 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: dnsTCP
+            - name: dns
               containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocolTCP }}
-            - name: dnsUDP
-              containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocolUDP }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: {{ include "dns.fullname" . }}-configMap
+            - name: {{ include "dns.fullname" . }}-configmapconf
               mountPath: "/{{ include "dns.fullname" . }}_conf"
-              {{- with .Values.volumeMounts }}
-              {{- toYaml . | nindent 14 }}
-              {{- end }}
+            - name: {{ include "dns.fullname" . }}-configmapdata
+              mountPath: "/{{ include "dns.fullname" . }}_data/"
       volumes:
-        - name: {{ include "dns.fullname" . }}-configMap
+        - name: {{ include "dns.fullname" . }}-configmapconf
           configMap:
-            name: {{ include "dns.fullname" . }}
+            name: {{ include "dns.fullname" . }}-conf
+        - name: {{ include "dns.fullname" . }}-configmapdata
+          configMap:
+            name: {{ include "dns.fullname" . }}-data

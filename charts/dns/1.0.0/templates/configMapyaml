@@ -5,61 +5,8 @@ metadata:
   labels:
     {{- include "dns.labels" . | nindent 4 }}
 data:
-  bind.keys: |
-    # Copyright (C) Internet Systems Consortium, Inc. ("ISC")
-    #
-    # SPDX-License-Identifier: MPL-2.0
-    #
-    # This Source Code Form is subject to the terms of the Mozilla Public
-    # License, v. 2.0. If a copy of the MPL was not distributed with this
-    # file, you can obtain one at https://mozilla.org/MPL/2.0/.
-    #
-    # See the COPYRIGHT file distributed with this work for additional
-    # information regarding copyright ownership.
-
-    # The bind.keys file is used to override the built-in DNSSEC trust anchors
-    # which are included as part of BIND 9.  The only trust anchors it contains
-    # are for the DNS root zone (".").  Trust anchors for any other zones MUST
-    # be configured elsewhere; if they are configured here, they will not be
-    # recognized or used by named.
-    #
-    # To use the built-in root key, set "dnssec-validation auto;" in the
-    # named.conf options, or else leave "dnssec-validation" unset.  If
-    # "dnssec-validation" is set to "yes", then the keys in this file are
-    # ignored; keys will need to be explicitly configured in named.conf for
-    # validation to work.  "auto" is the default setting, unless named is
-    # built with "configure --disable-auto-validation", in which case the
-    # default is "yes".
-    #
-    # This file is NOT expected to be user-configured.
-    #
-    # Servers being set up for the first time can use the contents of this file
-    # as initializing keys; thereafter, the keys in the managed key database
-    # will be trusted and maintained automatically.
-    #
-    # These keys are current as of Mar 2019.  If any key fails to initialize
-    # correctly, it may have expired.  In that event you should replace this
-    # file with a current version.  The latest version of bind.keys can always
-    # be obtained from ISC at https://www.isc.org/bind-keys.
-    #
-    # See https://data.iana.org/root-anchors/root-anchors.xml for current trust
-    # anchor information for the root zone.
-
-    trust-anchors {
-        # This key (20326) was published in the root zone in 2017.
-        . initial-key 257 3 8 "AwEAAaz/tAm8yTn4Mfeh5eyI96WSVexTBAvkMgJzkKTOiW1vkIbzxeF3
-                +/4RgWOq7HrxRixHlFlExOLAJr5emLvN7SWXgnLh4+B5xQlNVz8Og8kv
-                ArMtNROxVQuCaSnIDdD5LKyWbRd2n9WGe2R8PzgCmr3EgVLrjyBxWezF
-                0jLHwVN8efS3rCj/EWgvIWgb9tarpVUDK/b58Da+sqqls3eNbuv7pr+e
-                oZG+SrDK6nWeL3c6H5Apxz7LjVc1uTIdsIXxuOLYA4/ilBmSVIzuDWfd
-                RUfhHdY6+cn8HFRm+2hM8AnXGXws9555KrUB5qihylGa8subX2Nn6UwN
-                R1AkUTV74bU=";
-    };
   ddns.key: |
-    key ddns-update {
-	    algorithm HMAC-MD5.SIG-ALG.REG.INT;
-	    secret "Dm690ouX47i2+yW4z72sVQ==";
-    };
+    key ddns-update { algorithm HMAC-MD5.SIG-ALG.REG.INT; secret "Dm690ouX47i2+yW4z72sVQ=="; };
   named.conf: |
     // This is the primary configuration file for the BIND DNS server named.
     //
@@ -67,117 +14,58 @@ data:
     // structure of BIND configuration files in Debian, *BEFORE* you customize 
     // this configuration file.
     //
-    // If you are just adding zones, please do that in /etc/bind/named.conf.local
+    // If you are just adding zones, please do that in /home-dhcp_conf/named.conf.local
 
-    include "/home-dns_conf/named.conf.local";
     include "/home-dns_conf/named.conf.options";
     include "/home-dns_conf/named.conf.default-zones";
+    include "/home-dns_conf/named.conf.local";
   named.conf.default-zones: |
     // prime the server with knowledge of the root servers
-
-    zone "." {
-      type hint;
-      file "/home-dns_data/db.root";
-    };
+    zone "."                            { type hint; file "/home-dns_data/db.root"; };
 
     // be authoritative for the localhost forward and reverse zones, and for
     // broadcast zones as per RFC 1912
-
-    zone "localhost" {
-      type master;
-      file "/home-dns_data/db.local";
-    };
-
-    zone "127.in-addr.arpa" {
-      type master;
-      file "/home-dns_data/db.127";
-    };
-
-    zone "0.in-addr.arpa" {
-      type master;
-      file "/home-dns_data/db.0";
-    };
-
-    zone "255.in-addr.arpa" {
-      type master;
-      file "/home-dns_data/db.255";
-    };
+    zone "localhost"                    { type master; file "/home-dns_data/db.local"; };
+    zone "127.in-addr.arpa"             { type master; file "/home-dns_data/db.127"; };
+    zone "0.in-addr.arpa"               { type master; file "/home-dns_data/db.0"; };
+    zone "255.in-addr.arpa"             { type master; file "/home-dns_data/db.255"; };
   named.conf.local: |
     include "/home-dns_conf/ddns.key";
 
-    zone "erathnet.de" IN {
-      type master;
-      file "/home-dns_data/erathnet.de_zone";
-      allow-update {
-          key ddns-update;
-          dcs;
-      };
-    };
-
-    zone "_msdcs.erathnet.de" IN {
-      type master;
-      file "/home-dns_data/_msdcs.erathnet.de_zone";
-      allow-update { dcs; };
-    };
-
-    zone "_sites.erathnet.de" IN {
-      type master;
-      file "/home-dns_data/_sites.erathnet.de_zone";
-      allow-update { dcs; };
-    };
-
-    zone "_tcp.erathnet.de" IN {
-      type master;
-      file "/home-dns_data/_tcp.erathnet.de_zone";
-      allow-update { dcs; };
-    };
-
-    zone "_udp.erathnet.de" IN {
-      type master;
-      file "/home-dns_data/_udp.erathnet.de_zone";
-      allow-update { dcs; };
-    };
-
-    zone "stuttgart-hundepension.de" IN {
-            type master;
-            file "/home-dns_data/stuttgart-hundepension.de_zone";
-    };      
-
-    zone "tinaerath.de" IN {
-            type master; 
-            file "/home-dns_data/tinaerath.de_zone";
-    };
-
-    zone "0.168.192.in-addr.arpa" IN {
-      type master;
-      file "/home-dns_data/0.168.192.in-addr.arpa_zone";
-    };
-
-    zone "2.168.192.in-addr.arpa" IN {
-      type master;
-      file "/home-dns_data/2.168.192.in-addr.arpa_zone";
-      allow-update { dcs; };
-    };
-
-    zone "3.168.192.in-addr.arpa" IN {
-      type master;
-      file "/home-dns_data/3.168.192.in-addr.arpa_zone";
-      allow-update { key ddns-update; };
-    };
-
-    zone "5.168.192.in-addr.arpa" IN {
-      type slave;
-      masters { 192.168.5.4 key notify-update; };
-      file "/home-dns_data/5.168.192.in-addr.arpa_zone";
-    };
-
-    zone "6.168.192.in-addr.arpa" IN {
-      type slave;
-      masters { 192.168.5.4 key notify-update; };
-      file "/home-dns_data/6.168.192.in-addr.arpa_zone";
-    };
+    zone "10.in-addr.arpa"              { type master; file "/home-dns_data/db.empty"; };
+    zone "16.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "17.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "18.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "19.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "20.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "21.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "22.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "23.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "24.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "25.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "26.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "27.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "28.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "29.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "30.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "31.172.in-addr.arpa"          { type master; file "/home-dns_data/db.empty"; };
+    zone "erathnet.de" IN               { type master; file "/home-dns_data/erathnet.de_zone"; allow-update { key ddns-update; dcs; }; };
+    zone "_msdcs.erathnet.de" IN        { type master; file "/home-dns_data/_msdcs.erathnet.de_zone"; allow-update { dcs; }; };
+    zone "_sites.erathnet.de" IN        { type master; file "/home-dns_data/_sites.erathnet.de_zone"; allow-update { dcs; }; };
+    zone "_tcp.erathnet.de" IN          { type master; file "/home-dns_data/_tcp.erathnet.de_zone"; allow-update { dcs; }; }; 
+    zone "_udp.erathnet.de" IN          { type master; file "/home-dns_data/_udp.erathnet.de_zone"; allow-update { dcs; }; };
+    zone "stuttgart-hundepension.de" IN { type master; file "/home-dns_data/stuttgart-hundepension.de_zone"; };
+    zone "tinaerath.de" IN              { type master; file "/home-dns_data/tinaerath.de_zone"; };
+    zone "0.168.192.in-addr.arpa" IN    { type master; file "/home-dns_data/0.168.192.in-addr.arpa_zone"; };
+    zone "2.168.192.in-addr.arpa" IN    { type master; file "/home-dns_data/2.168.192.in-addr.arpa_zone"; allow-update { dcs; }; };
+    zone "3.168.192.in-addr.arpa" IN    { type master; file "/home-dns_data/3.168.192.in-addr.arpa_zone"; allow-update { key ddns-update; }; };
+    zone "5.168.192.in-addr.arpa" IN    { type slave; masters { 192.168.5.4 key notify-update; }; file "/home-dns_data/5.168.192.in-addr.arpa_zone"; };
+    zone "6.168.192.in-addr.arpa" IN    { type slave; masters { 192.168.5.4 key notify-update; }; file "/home-dns_data/6.168.192.in-addr.arpa_zone"; };
   named.conf.options: |
     include "/home-dns_conf/notify.key";
+    include "/home-dns_conf/rndc.key";
+
+    controls { inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; }; };
 
     acl servernet {
       192.168.2.1;
@@ -207,53 +95,26 @@ data:
       192.168.5.4;
       192.168.5.5;
     };
-
-    acl dcs {
-      192.168.2.7;
-      192.168.2.8;
-    };
-
-    acl clientnet {
-      192.168.3.0/24;
-    };
+    acl dcs { 192.168.2.7; 192.168.2.8; };
+    acl clientnet { 192.168.3.0/24; };
 
     options {
-      directory "/home-dns_data/";
-
-      allow-query {
-        servernet;
-        clientnet;
-      };
-
+      also-notify { 192.168.2.5; 192.168.5.4; 192.168.5.5; };
+      allow-query { servernet; clientnet; };
       allow-recursion { any; };
-
       allow-transfer { key notify-update; };
-
-      also-notify {
-        192.168.2.5;
-        192.168.5.4;
-        192.168.5.5;
-      };
-
+      auth-nxdomain no;
       check-names master ignore;
-
-      forwarders {
-        1.1.1.1;
-        1.0.0.1;
-      };
-
+      dnssec-validation auto;
+      empty-zones-enable yes;
+      forwarders { 1.1.1.1; 1.0.0.1; };
+      managed-keys-directory "/var/cache/bind/";
       notify yes;
-
-      dnssec-validation auto;	
-
-      auth-nxdomain no;    # conform to RFC1035
-      empty-zones-enable no;
     };
   notify.key: |
-    key notify-update {
-        algorithm HMAC-MD5.SIG-ALG.REG.INT;
-        secret "frmHGNeDCOikjkNOIxNO/A==";
-    };
+    key notify-update { algorithm HMAC-MD5.SIG-ALG.REG.INT; secret "frmHGNeDCOikjkNOIxNO/A=="; };
+  rndc.key: |
+    key "rndc-key" { algorithm hmac-sha256; secret "8sGKidri4SX4bdCB+XpHZwTR+GCG7+wArPpOrVHM2LA="; };
 
 ---
 apiVersion: v1
@@ -303,8 +164,6 @@ data:
           SRV	0 100 3268 home-dc02.erathnet.de.
     $ORIGIN _msdcs.erathnet.de.
     _ldap._tcp.pdc		SRV	0 100 389 home-dc01.erathnet.de.
-  _msdcs.erathnet.de_zone.jnl: |
-
   _sites.erathnet.de_zone: |
     $ORIGIN .
     $TTL 86400	; 1 day
@@ -327,8 +186,6 @@ data:
           SRV	0 100 88 home-dc02.erathnet.de.
     _ldap			SRV	0 100 389 home-dc01.erathnet.de.
           SRV	0 100 389 home-dc02.erathnet.de.
-  _sites.erathnet.de_zone.jnl: |
-
   _tcp.erathnet.de_zone: |
     $ORIGIN .
     $TTL 86400	; 1 day
@@ -354,8 +211,6 @@ data:
           SRV	0 100 464 home-dc02.erathnet.de.
     _ldap			SRV	0 100 389 home-dc01.erathnet.de.
           SRV	0 100 389 home-dc02.erathnet.de.
-  _tcp.erathnet.de_zone.jnl: |
-
   _udp.erathnet.de_zone: |
     $ORIGIN .
     $TTL 86400	; 1 day
@@ -376,8 +231,6 @@ data:
           SRV	0 100 88 home-dc02.erathnet.de.
     _kpasswd		SRV	0 100 464 home-dc01.erathnet.de.
           SRV	0 100 464 home-dc02.erathnet.de.
-  _udp.erathnet.de_zone.jnl: |
-
   0.168.192.in-addr.arpa_zone: |
     $ORIGIN 0.168.192.in-addr.arpa.
     $TTL 2D
@@ -449,8 +302,6 @@ data:
     ; VLAN 17
     225	PTR	home-sv17router.erathnet.de.
     226	PTR	home-backup.erathnet.de.
-  2.168.192.in-addr.arpa_zone.jnl: |
-
   3.168.192.in-addr.arpa_zone: |
     $ORIGIN 3.168.192.in-addr.arpa.
     $TTL 1H ; 1 hour
@@ -510,19 +361,7 @@ data:
     209		PTR	home-bdrcam.erathnet.de.
     210		PTR	home-bfcam.erathnet.de.
     219		PTR	home-kspy.erathnet.de.
-  3.168.192.in-addr.arpa_zone.jnl: |
-
-  5.168.192.in-addr.arpa_zone: |
-
-  5.168.192.in-addr.arpa_zone.jnl: |
-    
-  6.168.192.in-addr.arpa_zone: |
-
-  6.168.192.in-addr.arpa_zone.jnl: |
-
   db.0: |
-    ; BIND reverse data file for broadcast zone
-    ;
     $TTL	604800
     @	IN	SOA	localhost. root.localhost. (
                 1		; Serial
@@ -533,8 +372,6 @@ data:
     ;
     @	IN	NS	localhost.
   db.127: |
-    ; BIND reverse data file for local loopback interface
-    ;
     $TTL	604800
     @	IN	SOA	localhost. root.localhost. (
                 1		; Serial
@@ -546,8 +383,6 @@ data:
     @	IN	NS	localhost.
     1.0.0	IN	PTR	localhost.
   db.255: |
-    ; BIND reverse data file for broadcast zone
-    ;
     $TTL	604800
     @	IN	SOA	localhost. root.localhost. (
                 1		; Serial
@@ -557,9 +392,17 @@ data:
           604800 )	; Negative Cache TTL
     ;
     @	IN	NS	localhost.
-  db.local: |
-    ; BIND data file for local loopback interface
+  db.empty: |
+    $TTL	86400
+    @	IN	SOA	localhost. root.localhost. (
+                1		; Serial
+          604800		; Refresh
+            86400		; Retry
+          2419200		; Expire
+            86400 )	; Negative Cache TTL
     ;
+    @	IN	NS	localhost.
+  db.local: |
     $TTL	604800
     @	IN	SOA	localhost. root.localhost. (
                 2		; Serial
@@ -572,22 +415,6 @@ data:
     @	IN	A	127.0.0.1
     @	IN	AAAA	::1
   db.root: |
-    ;       This file holds the information on root name servers needed to
-    ;       initialize cache of Internet domain name servers
-    ;       (e.g. reference this file in the "cache  .  <file>"
-    ;       configuration file of BIND domain name servers).
-    ;
-    ;       This file is made available by InterNIC 
-    ;       under anonymous FTP as
-    ;           file                /domain/named.cache
-    ;           on server           FTP.INTERNIC.NET
-    ;       -OR-                    RS.INTERNIC.NET
-    ;
-    ;       last update:    February 17, 2016
-    ;       related version of root zone:   2016021701
-    ;
-    ; formerly NS.INTERNIC.NET
-    ;
     .                        3600000      NS    A.ROOT-SERVERS.NET.
     A.ROOT-SERVERS.NET.      3600000      A     198.41.0.4
     A.ROOT-SERVERS.NET.      3600000      AAAA  2001:503:ba3e::2:30
@@ -661,7 +488,6 @@ data:
     .                        3600000      NS    M.ROOT-SERVERS.NET.
     M.ROOT-SERVERS.NET.      3600000      A     202.12.27.33
     M.ROOT-SERVERS.NET.      3600000      AAAA  2001:dc3::35
-    ; End of file
   erathnet.de_zone: |
     $ORIGIN erathnet.de.
     $TTL 1H ; 1 hour
@@ -864,21 +690,6 @@ data:
     ;
     ; VLAN 26
     flat-cv26router		A	192.168.6.193
-  erathnet.de_zone.jnl: |
-
-  managed-keys.bind: |
-    $ORIGIN .
-    $TTL 0	; 0 seconds
-    @			IN SOA	. . (
-            10         ; serial
-            0          ; refresh (0 seconds)
-            0          ; retry (0 seconds)
-            0          ; expire (0 seconds)
-            0          ; minimum (0 seconds)
-            )
-          KEYDATA	20240202004039 19700101000000 19700101000000 0 0 0 ; placeholder
-  managed-keys.bind.jnl: |
-
   stuttgart-hundepension.de_zone: |
     $ORIGIN stuttgart-hundepension.de.
     $TTL 2D

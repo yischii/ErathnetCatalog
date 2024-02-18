@@ -1,0 +1,31 @@
+groups:
+  - name: "Network"
+    description: "Network configuration for DNS server"
+  - name: "Storage"
+    description: "Storage configuration fpr DNS server"
+
+questions:
+  - variable: network
+    label: "Network interface for DNS server"
+    description: "Select the network interface for DNS server to listen on"
+    group: "Network"
+    schema:
+      type: string
+      required: true
+      $ref:
+        - "definitions/interface"
+  - variable: volume
+    label: "Data storage volume for DNS server"
+    description: "Select the data storage volume for DNS server"
+    group: "Storage"
+    schema:
+      type: dict
+      $ref:
+        - "normalize/ixVolume"
+      attrs:
+        - variable: datasetName
+          label: "Dataset Name"
+          dexcription: "Define the dataset name fpr the data storage volume for DNS server"
+          schema:
+            type: string
+            required: true

@@ -10,9 +10,13 @@
         "version": "1.0.0",
         "chart_metadata": {
             "name": "dns",
-            "description": "dns Server App for TrueNAS SCALE",
+            "description": "DNS Server App for TrueNAS SCALE",
             "annotations": {
-                "title": "DNS"
+                "App": "BIND DNS Server",
+                "Environment": "Production",
+                "Release": "Stable",
+                "Service": "DNS",
+                "Tier": "Backend"
             },
             "type": "application",
             "version": "1.0.0",
@@ -52,6 +56,30 @@
                         "required": "true",
                         "$ref": [
                             "definitions/interface"
+                        ]
+                    }
+                },
+                {
+                    "variable": "volume",
+                    "label": "Data storage volume for DNS server",
+                    "description": "Select the data storage volume for DNS server",
+                    "group": "Storage",
+                    "schema": {
+                        "type": "dict",
+                        "required": "true",
+                        "$ref": [
+                            "normalize/ixVolume"
+                        ],
+                        "attrs": [
+                            {
+                                "variable": "datasetName",
+                                "label": "Dataset Name",
+                                "description": "Define the dataset name fpr the data storage volume for DNS server",
+                                "schema": {
+                                    "type": "string",
+                                    "required": "true"
+                                }
+                            }
                         ]
                     }
                 }

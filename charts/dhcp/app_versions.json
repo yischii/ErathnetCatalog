@@ -12,11 +12,11 @@
             "name": "dhcp",
             "description": "DHCP Server App for TrueNAS SCALE",
             "annotations": {
-                "Release": "Stable",
+                "App": "ISC-DHCP-Server",
                 "Environment": "Production",
-                "Tier": "Backend",
+                "Release": "Stable",
                 "Service": "DHCP",
-                "App": "ISC-DHCP-Server"
+                "Tier": "Backend"
             },
             "type": "application",
             "version": "1.0.0",

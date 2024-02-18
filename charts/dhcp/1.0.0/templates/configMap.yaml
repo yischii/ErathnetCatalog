@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "dhcp.fullname" . }}
+  name: {{ include "dhcp.fullname" . }}-conf
   labels:
     {{- include "dhcp.labels" . | nindent 4 }}
 data:
@@ -70,6 +70,9 @@ data:
     # Server subnet
     #Test
     subnet 172.29.240.0 netmask 255.255.240.0 {
+    }
+
+    subnet 192.168.65.0 netmask 255.255.255.0 {
     }
 
     # VLAN 10
