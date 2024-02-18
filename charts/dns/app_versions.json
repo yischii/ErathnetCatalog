@@ -43,6 +43,10 @@
                 {
                     "name": "Network",
                     "description": "Network configuration for DNS server"
+                },
+                {
+                    "name": "Storage",
+                    "description": "Storage configuration fpr DNS server"
                 }
             ],
             "questions": [
@@ -74,7 +78,7 @@
                             {
                                 "variable": "datasetName",
                                 "label": "Dataset Name",
-                                "description": "Define the dataset name fpr the data storage volume for DNS server",
+                                "description": "Define the dataset name for the data storage volume for DNS server",
                                 "schema": {
                                     "type": "string",
                                     "required": "true"
