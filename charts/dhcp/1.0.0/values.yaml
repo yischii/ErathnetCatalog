@@ -9,7 +9,7 @@ env:
 
 image:
   repository: yischi/dhcp
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 podAnnotations: {
   "Release": "Stable",
