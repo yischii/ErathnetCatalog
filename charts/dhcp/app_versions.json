@@ -52,10 +52,33 @@
                     "description": "Select the network interface for DHCP server to listen on",
                     "group": "Network",
                     "schema": {
-                        "type": "string",
-                        "required": "true",
-                        "$ref": [
-                            "definitions/interface"
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "interface",
+                                "label": "Network interface for DHCP server",
+                                "description": "Select the network interface for DHCP server",
+                                "schema": [
+                                    {
+                                        "type": "string",
+                                        "required": "true",
+                                        "$ref": [
+                                            "definitions/interface"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "variable": "ipAddress",
+                                "label": "IP address for DHCP server",
+                                "description": "Define the ip address for DHCP server",
+                                "schema": [
+                                    {
+                                        "type": "ipaddr",
+                                        "required": "true"
+                                    }
+                                ]
+                            }
                         ]
                     }
                 }
