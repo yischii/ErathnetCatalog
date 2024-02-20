@@ -43,10 +43,6 @@
                 {
                     "name": "Network",
                     "description": "Network configuration for DHCP server"
-                },
-                {
-                    "name": "Storage",
-                    "description": "Storage configuration for DHCP server"
                 }
             ],
             "questions": [
@@ -59,51 +55,6 @@
                         "type": "ipaddr",
                         "required": "true"
                     }
-                },
-                {
-                    "variable": "volume",
-                    "label": "Data volume for DHCP server",
-                    "group": "Storage",
-                    "schema": {
-                        "type": "dict",
-                        "attrs": [
-                            {
-                                "variable": "type",
-                                "label": "Type",
-                                "description": "EmptyDir: Is a temporary directory that will be created on the disk",
-                                "schema": {
-                                    "type": "string",
-                                    "required": "true",
-                                    "default": "emptyDir",
-                                    "enum": [
-                                        {
-                                            "value": "emptyDir",
-                                            "description": "EmptyDir (Temporary directory created on the disk)"
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                "variable": "emptyDirConfig",
-                                "label": "EmptyDir Configuration",
-                                "schema": {
-                                    "type": "dict",
-                                    "attrs": [
-                                        {
-                                            "variable": "size",
-                                            "label": "EmptyDir Size Limit (in MB)",
-                                            "description": "The maximum size (in MB) of the temporary directory</br>\nMaximal size can be 64 MB",
-                                            "schema": {
-                                                "type": "int",
-                                                "null": "true",
-                                                "default": "32"
-                                            }
-                                        }
-                                    ]
-                                }
-                            }
-                        ]
-                    }  
                 }
             ]
         }
