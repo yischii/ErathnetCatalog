@@ -54,5 +54,4 @@ spec:
             name: {{ include "dhcp.fullname" . }}-conf
         - name: {{ include "dhcp.fullname" . }}-emptydirdata
           {{ .Values.volume.type | nindent 10 }}:
-            sizeLimit: 
-              {{ .Values.volume.emptyDirConfig.size }}
+            sizeLimit: {{ .Values.volume.emptyDirConfig.size }}
