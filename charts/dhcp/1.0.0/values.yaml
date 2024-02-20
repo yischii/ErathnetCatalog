@@ -26,7 +26,7 @@ resources:
     ephemeral-storage: 64M
     memory: 64M
   requests:
-    ephemeral-storage: 632M
+    ephemeral-storage: 32M
     memory: 32M
 
 service:
