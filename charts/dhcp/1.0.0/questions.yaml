@@ -8,10 +8,8 @@ questions:
     description: "Select the network interface for DHCP server to listen on"
     group: "Network"
     schema:
-      type: string
+      type: ipaddr
       required: true
-      $ref:
-        - "definitions/interface"
   - variable: volume
     label: "Data volume for DHCP server"
     group: "Storage"
@@ -41,5 +39,5 @@ questions:
                       Maximal size can be 64 MB
                     schema:
                       type: int
-                        "null": true
-                        default: 32
+                      "null": true
+                      default: 32

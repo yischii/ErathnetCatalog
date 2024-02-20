@@ -30,7 +30,6 @@ resources:
     memory: 32M
 
 service:
-  externalIP: 172.26.98.163
   externalName: home-dhcp.erathnet.de
   port: 67
   protocol: UDP
