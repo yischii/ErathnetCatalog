@@ -43,6 +43,10 @@
                 {
                     "name": "Network",
                     "description": "Network configuration for DHCP server"
+                },
+                {
+                    "name": "Storage",
+                    "description": "Storage configuration for DHCP server"
                 }
             ],
             "questions": [
