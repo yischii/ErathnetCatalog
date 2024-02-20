@@ -46,7 +46,13 @@ spec:
               {{- with .Values.volumeMounts }}
               {{- toYaml . | nindent 14 }}
               {{- end }}
+            - name: {{ include "dhcp.fullname" . }}-emptydirdata
+              mountPath: "/{{ include "dhcp.fullname" . }}_data
       volumes:
         - name: {{ include "dhcp.fullname" . }}-configmap
           configMap:
             name: {{ include "dhcp.fullname" . }}-conf
+        - name: {{ include "dhcp.fullname" . }}-emptydirdata
+          {{ .Values.volume.type }}:
+            sizeLimit: 
+              {{ .Values.volume.emptyDirConfig.size }}

@@ -12,3 +12,34 @@ questions:
       required: true
       $ref:
         - "definitions/interface"
+  - variable: volume
+    label: "Data volume for DHCP server"
+    group: "Storage"
+    schema:
+      type: dict
+        attrs:
+          - variable: type
+            label: Type
+            description: |
+              emptyDir: Is a temporary directory that will be created on the disk
+            schema:
+              type: string
+              required: true
+              default: "emptyDir"
+              enum:
+              - value: "emptyDir"
+                description: emptyDir (Temporary directory created on the disk)
+          - variable: emptyDirConfig
+            label: emptyDir Configuration
+            schema:
+              type: dict
+                attrs:
+                  - variable: size
+                    label: emptyDir Size Limit (in MB)
+                    description: |
+                      The maximum size (in MB) of the temporary directory</br>
+                      Maximal size can be 64 MB
+                    schema:
+                      type: int
+                        "null": true
+                        default: 32

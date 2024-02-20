@@ -19,12 +19,29 @@ questions:
     group: "Storage"
     schema:
       type: dict
-      $ref:
-        - "normalize/ixVolume"
-      attrs:
-        - variable: datasetName
-          label: "Dataset name"
-          description: "Define the dataset name for the DNS server data storage volume"
-          schema:
-            type: string
-            required: true
+        attrs:
+          - variable: type
+            label: Type
+            description: |
+              emptyDir: Is a temporary directory that will be created on the disk
+            schema:
+              type: string
+              required: true
+              default: "emptyDir"
+              enum:
+              - value: "emptyDir"
+                description: emptyDir (Temporary directory created on the disk)
+          - variable: emptyDirConfig
+            label: emptyDir Configuration
+            schema:
+              type: dict
+                attrs:
+                  - variable: size
+                    label: emptyDir Size Limit (in MB)
+                    description: |
+                      The maximum size (in MB) of the temporary directory</br>
+                      Maximal size can be 64 MB
+                    schema:
+                      type: int
+                        "null": true
+                        default: 32

@@ -23,8 +23,10 @@ replicaCount: 1
 
 resources:
   limits:
+    ephemeral-storage: 64M
     memory: 64M
   requests:
+    ephemeral-storage: 632M
     memory: 32M
 
 service:
