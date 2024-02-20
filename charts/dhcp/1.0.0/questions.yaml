@@ -1,12 +1,25 @@
 groups:
-  - name: "Network"
-    description: "Network configuration for DHCP server"
+  - name: Network
+    description: Network configuration for DHCP server
 
 questions:
   - variable: network
-    label: "IP address for DHCP server"
-    description: "Define the ip address for DHCP server to listen on"
-    group: "Network"
+    label: Network configuration for DHCP server
+    group: Network
     schema:
-      type: ipaddr
-      required: true
+      type: dict
+      attrs:
+        - variable: interface
+          label: Network interface for DHCP server
+          description: Select the network interface for DHCP server
+          schema:
+            type: string
+            required: true
+            $ref:
+              - "definitions/interface"
+        - variable: ipAddress
+          label: IP address for DHCP server
+          description: Define the ip address for DHCP server
+          schema:
+            type: ipaddr
+            required: true

@@ -32,7 +32,7 @@ spec:
         - name: {{ .Chart.Name }}
           env:
             - name: {{ .Values.env.name }}
-              value: {{ .Values.network }}
+              value: {{ .Values.network.interface }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
