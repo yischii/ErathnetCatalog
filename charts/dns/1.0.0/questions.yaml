@@ -15,6 +15,7 @@ questions:
       $ref:
         - "definitions/interface"
   - variable: volume
+    label: "Data volume for DNS server"
     group: "Storage"
     schema:
       type: dict
@@ -22,8 +23,8 @@ questions:
         - "normalize/ixVolume"
       attrs:
         - variable: datasetName
-          label: "Dataset Name"
-          dexcription: "Define the dataset name for the data storage volume for DNS server"
+          label: "Dataset name"
+          description: "Define the dataset name for the data storage volume for DNS server"
           schema:
             type: string
             required: true
