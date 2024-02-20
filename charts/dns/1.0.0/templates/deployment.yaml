@@ -44,6 +44,8 @@ spec:
               mountPath: "/{{ include "dns.fullname" . }}_conf"
             - name: {{ include "dns.fullname" . }}-configmapdata
               mountPath: "/{{ include "dns.fullname" . }}_data/"
+            - name: {{ include "dns.fullname" . }}-volumedata
+              mountPath: "/{{ include "dns.fullname" . }}_cache"
       volumes:
         - name: {{ include "dns.fullname" . }}-configmapconf
           configMap:
@@ -51,3 +53,5 @@ spec:
         - name: {{ include "dns.fullname" . }}-configmapdata
           configMap:
             name: {{ include "dns.fullname" . }}-data
+        - name: {{ include "dns.fullname" . }}-volumedata
+          

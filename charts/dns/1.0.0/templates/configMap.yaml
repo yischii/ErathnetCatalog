@@ -80,7 +80,7 @@ data:
       also-notify { 192.168.2.5; 192.168.5.4; 192.168.5.5; };
       auth-nxdomain no;
       check-names master ignore;
-      managed-keys-directory "/var/cache/bind";
+      managed-keys-directory "/home-dns_cache";
       dnssec-validation auto;
       empty-zones-enable yes;
       forwarders { 1.1.1.1; 1.0.0.1; };

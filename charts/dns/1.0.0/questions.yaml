@@ -24,7 +24,7 @@ questions:
       attrs:
         - variable: datasetName
           label: "Dataset name"
-          description: "Define the dataset name for the data storage volume for DNS server"
+          description: "Define the dataset name for the DNS server data storage volume"
           schema:
             type: string
             required: true
