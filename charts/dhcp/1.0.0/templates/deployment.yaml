@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      hostNetwork: true
+      hostNetwork: false
       containers:
         - name: {{ .Chart.Name }}
           env:
