@@ -20,7 +20,7 @@ questions:
         attrs:
           - variable: type
             label: Type
-            description: |
+            description: 
               emptyDir: Is a temporary directory that will be created on the disk
             schema:
               type: string
@@ -28,14 +28,14 @@ questions:
               default: "emptyDir"
               enum:
               - value: "emptyDir"
-                description: emptyDir (Temporary directory created on the disk)
+                description: EmptyDir (Temporary directory created on the disk)
           - variable: emptyDirConfig
-            label: emptyDir Configuration
+            label: EmptyDir Configuration
             schema:
               type: dict
                 attrs:
                   - variable: size
-                    label: emptyDir Size Limit (in MB)
+                    label: EmptyDir Size Limit (in MB)
                     description: |
                       The maximum size (in MB) of the temporary directory</br>
                       Maximal size can be 64 MB

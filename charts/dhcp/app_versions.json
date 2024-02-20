@@ -52,8 +52,8 @@
             "questions": [
                 {
                     "variable": "network",
-                    "label": "Network interface for DHCP server",
-                    "description": "Select the network interface for DHCP server to listen on",
+                    "label": "IP address for DHCP server",
+                    "description": "Define the ip address for DHCP server to listen on",
                     "group": "Network",
                     "schema": {
                         "type": "ipaddr",
@@ -70,7 +70,7 @@
                             {
                                 "variable": "type",
                                 "label": "Type",
-                                "description": "emptyDir: Is a temporary directory that will be created on the disk",
+                                "description": "EmptyDir: Is a temporary directory that will be created on the disk",
                                 "schema": {
                                     "type": "string",
                                     "required": "true",
@@ -78,20 +78,20 @@
                                     "enum": [
                                         {
                                             "value": "emptyDir",
-                                            "description": "emptyDir (Temporary directory created on the disk)"
+                                            "description": "EmptyDir (Temporary directory created on the disk)"
                                         }
                                     ]
                                 }
                             },
                             {
                                 "variable": "emptyDirConfig",
-                                "label": "emptyDir Configuration",
+                                "label": "EmptyDir Configuration",
                                 "schema": {
                                     "type": "dict",
                                     "attrs": [
                                         {
                                             "variable": "size",
-                                            "label": "emptyDir Size Limit (in MB)",
+                                            "label": "EmptyDir Size Limit (in MB)",
                                             "description": "The maximum size (in MB) of the temporary directory</br>\nMaximal size can be 64 MB",
                                             "schema": {
                                                 "type": "int",
