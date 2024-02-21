@@ -69,10 +69,13 @@
                             {
                                 "variable": "ipAddress",
                                 "label": "IP address for DHCP server",
-                                "description": "Define the ip address for DHCP server",
+                                "description": "Select the ip address for DHCP server",
                                 "schema": {
-                                    "type": "ipaddr",
-                                    "required": "true"
+                                    "type": "string",
+                                    "required": "true",
+                                    "$ref": [
+                                        "definitions/nodeIP"
+                                    ]
                                 }
                             }
                         ]
