@@ -19,7 +19,9 @@ questions:
               - "definitions/interface"
         - variable: ipAddress
           label: IP address for DHCP server
-          description: Define the ip address for DHCP server
+          description: Select the ip address for DHCP server
           schema:
-            type: ipaddr
+            type: string
             required: true
+            $ref:
+              - "definitions/nodeIP"

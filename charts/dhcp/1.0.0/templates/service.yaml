@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "dhcp.labels" . | nindent 4 }}
 spec:
+  clusterIP: 172.17.1.1
   externalIPs:
     - {{ .Values.network.ipAddress }}
   ports:
