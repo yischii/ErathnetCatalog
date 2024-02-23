@@ -30,7 +30,6 @@ spec:
             - name: {{ .Values.env.name }}
               value: {{ .Values.network.interface }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocol }}
