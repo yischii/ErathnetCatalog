@@ -5,9 +5,9 @@ metadata:
   labels:
     {{- include "test.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  externalIPs:
+    - 192.168.6.48
   ports:
-    - nodePort: 30100
       port: {{ .Values.service.port }}
       protocol: {{ .Values.service.protocol }}
       targetPort: {{ .Values.service.port }}
