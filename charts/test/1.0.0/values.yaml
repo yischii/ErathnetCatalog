@@ -29,3 +29,4 @@ resources:
 service:
   port: 30101
   protocol: TCP
+  targetPort: 67
