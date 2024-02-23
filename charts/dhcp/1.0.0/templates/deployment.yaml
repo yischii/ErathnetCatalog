@@ -42,10 +42,7 @@ spec:
               {{- with .Values.volumeMounts }}
               {{- toYaml . | nindent 14 }}
               {{- end }}
-      {{- with .Values.volumes }}
       volumes:
         - name: {{ include "dhcp.fullname" . }}-configmap
           configMap:
             name: {{ include "dhcp.fullname" . }}-conf
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
