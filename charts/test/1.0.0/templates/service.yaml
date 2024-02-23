@@ -8,6 +8,7 @@ spec:
   externalIPs:
     - 192.168.6.48
   ports:
+    - name: dhcp
       port: {{ .Values.service.port }}
       protocol: {{ .Values.service.protocol }}
       targetPort: {{ .Values.service.targetPort }}
