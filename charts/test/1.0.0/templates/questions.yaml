@@ -1,0 +1,27 @@
+groups:
+  - name: Network
+    description: Network configuration for DHCP server
+
+questions:
+  - variable: network
+    label: Network configuration for DHCP server
+    group: Network
+    schema:
+      type: dict
+      attrs:
+        - variable: interface
+          label: Network interface for DHCP server
+          description: Select the network interface for DHCP server
+          schema:
+            type: string
+            required: true
+            $ref:
+              - "definitions/interface"
+        - variable: ipAddress
+          label: IP address for DHCP server
+          description: Select the ip address for DHCP server
+          schema:
+            type: string
+            required: true
+            $ref:
+              - "definitions/nodeIP"

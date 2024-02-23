@@ -4,19 +4,16 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-env:
-  name: NETWORK_INTERFACE
-
 image:
-  repository: yischi/dhcp
+  repository: nginx
   pullPolicy: Always
 
 podAnnotations: {
   "Release": "Stable",
-  "Environment": "Production",
+  "Environment": "Test",
   "Tier": "Backend",
-  "Service": "DHCP",
-  "App": "ISC-DHCP-Server"
+  "Service": "HTTP",
+  "App": "NGINX"
 }
 
 replicaCount: 1
@@ -30,9 +27,6 @@ resources:
     memory: 32M
 
 service:
-  port: 67
-  protocol: UDP
+  port: 80
+  protocol: TCP
   type: NodePort
-
-volumeMounts:
-  readOnly: true

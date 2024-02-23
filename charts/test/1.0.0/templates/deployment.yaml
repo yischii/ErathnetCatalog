@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dhcp.fullname" . }}
+  name: {{ include "test.fullname" . }}
   labels:
-    {{- include "dhcp.labels" . | nindent 4 }}
+    {{- include "test.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "dhcp.selectorLabels" . | nindent 6 }}
+      {{- include "test.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "dhcp.labels" . | nindent 8 }}
+        {{- include "test.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -26,9 +26,6 @@ spec:
       hostNetwork: false
       containers:
         - name: {{ .Chart.Name }}
-          env:
-            - name: {{ .Values.env.name }}
-              value: {{ .Values.network.interface }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -36,16 +33,11 @@ spec:
               protocol: {{ .Values.service.protocol }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.volumeMounts }}
           volumeMounts:
-            - name: {{ include "dhcp.fullname" . }}-configmap
-              mountPath: "/{{ include "dhcp.fullname" . }}_conf"
-              {{- with .Values.volumeMounts }}
-              {{- toYaml . | nindent 14 }}
-              {{- end }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       {{- with .Values.volumes }}
       volumes:
-        - name: {{ include "dhcp.fullname" . }}-configmap
-          configMap:
-            name: {{ include "dhcp.fullname" . }}-conf
         {{- toYaml . | nindent 8 }}
       {{- end }}

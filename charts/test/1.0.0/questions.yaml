@@ -1,0 +1,19 @@
+groups:
+  - name: Network
+    description: Network configuration for NGINX server
+
+questions:
+  - variable: network
+    label: Network configuration for NGINX server
+    group: Network
+    schema:
+      type: dict
+      attrs:
+        - variable: ipAddress
+          label: IP address for NGINX server
+          description: Select the ip address for NGINX server
+          schema:
+            type: string
+            required: true
+            $ref:
+              - "definitions/nodeIP"
