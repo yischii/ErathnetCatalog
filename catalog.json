@@ -61,6 +61,37 @@
             "screenshots": [],
             "sources": [],
             "icon_url": ""
+        },
+        "test": {
+            "app_readme": "Test Server",
+            "categories": [
+                "network"
+            ],
+            "description": "NGINX Server App for TrueNAS SCALE",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "",
+            "location": "/__w/charts/test",
+            "latest_version": "1.0.0",
+            "latest_app_version": "2024.1.20",
+            "latest_human_version": "2024.1.20_1.0.0",
+            "last_update": "2024-01-20 18:00:00",
+            "name": "test",
+            "recommended": false,
+            "title": "TEST",
+            "maintainers": [
+                {
+                    "name": "Erathnet",
+                    "url": "https://www.erathnet.de/",
+                    "email": "administrator@erathnet.de"
+                }
+            ],
+            "tags": [
+                "TEST"
+            ],
+            "screenshots": [],
+            "sources": [],
+            "icon_url": ""
         }
     }
 }
