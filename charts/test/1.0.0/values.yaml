@@ -27,6 +27,6 @@ resources:
     memory: 32M
 
 service:
-  port: 30101
+  port: 2500
   protocol: TCP
   targetPort: 80
