@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "dhcp.labels" . | nindent 4 }}
 spec:
+  externalIPs:
+    - {{ Values.network.ipAddress }}
   ports:
     - name: {{ .Values.service.name }}
       port: {{ .Values.service.port }}
