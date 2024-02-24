@@ -57,10 +57,7 @@
                                 "description": "Select the ip address for DHCP server",
                                 "schema": {
                                     "type": "string",
-                                    "required": "true",
-                                    "$ref": [
-                                        "definitions/nodeIP"
-                                    ]
+                                    "required": "true"
                                 }
                             }
                         ]
