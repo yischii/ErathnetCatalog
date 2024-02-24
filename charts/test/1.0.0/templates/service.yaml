@@ -14,3 +14,4 @@ spec:
       targetPort: {{ .Values.service.targetPort }}
   selector:
     {{- include "test.selectorLabels" . | nindent 4 }}
+  type: {{ .Values.service.type }}

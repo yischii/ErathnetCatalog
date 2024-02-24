@@ -23,12 +23,8 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      hostNetwork: false
       containers:
         - name: {{ .Chart.Name }}
-          env:
-            - name: {{ .Values.env.name }}
-              value: {{ .Values.network.interface }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           ports:
             - containerPort: {{ .Values.service.port }}
