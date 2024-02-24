@@ -1,6 +1,7 @@
 {
     "charts": {
         "dhcp": {
+            "name": "dhcp",
             "app_readme": "DHCP Server",
             "categories": [
                 "network"
@@ -9,14 +10,12 @@
             "healthy": true,
             "healthy_error": null,
             "home": "",
-            "location": "/__w/charts/dhcp",
-            "latest_version": "1.0.0",
+            "icon_url": "",
             "latest_app_version": "2024.1.20",
             "latest_human_version": "2024.1.20_1.0.0",
             "last_update": "2024-01-20 18:00:00",
-            "name": "dhcp",
-            "recommended": false,
-            "title": "DHCP",
+            "latest_version": "1.0.0",
+            "location": "/__w/charts/dhcp",
             "maintainers": [
                 {
                     "name": "Erathnet",
@@ -24,12 +23,13 @@
                     "email": "administrator@erathnet.de"
                 }
             ],
+            "recommended": false,
+            "screenshots": [],
+            "sources": [],
             "tags": [
                 "DHCP"
             ],
-            "screenshots": [],
-            "sources": [],
-            "icon_url": ""
+            "title": "DHCP"
         },
         "dns": {
             "app_readme": "DNS Server",

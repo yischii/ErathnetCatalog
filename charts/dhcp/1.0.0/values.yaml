@@ -9,11 +9,11 @@ image:
   pullPolicy: Always
 
 podAnnotations: {
-  "Release": "Stable",
+  "App": "ISC-DHCP-Server",
   "Environment": "Production",
-  "Tier": "Backend",
+  "Release": "Stable",
   "Service": "DHCP",
-  "App": "ISC-DHCP-Server"
+  "Tier": "Backend"
 }
 
 replicaCount: 1
@@ -30,7 +30,6 @@ service:
   name: dhcp
   port: 67
   protocol: UDP
-  type: NodePort
 
 volumeMounts:
   readOnly: true

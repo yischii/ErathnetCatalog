@@ -1,16 +1,8 @@
 {
     "1.0.0": {
-        "healthy": true,
-        "supported": true,
-        "healthy_error": null,
-        "location": "/__w/charts/dhcp/1.0.0",
-        "last_update": "2024-01-20 18:00:00",
-        "required_features": [],
-        "human_version": "2024.1.20_1.0.0",
-        "version": "1.0.0",
+        "app_metadata": {},
         "chart_metadata": {
             "name": "dhcp",
-            "description": "DHCP Server App for TrueNAS SCALE",
             "annotations": {
                 "App": "ISC-DHCP-Server",
                 "Environment": "Production",
@@ -18,26 +10,32 @@
                 "Service": "DHCP",
                 "Tier": "Backend"
             },
-            "type": "application",
-            "version": "1.0.0",
             "apiVersion": "v2",
             "appVersion": "2024.1.20",
+            "description": "DHCP Server App for TrueNAS SCALE",
+            "home": "",
+            "icon": "",
+            "keywords": [
+                "dhcp"
+            ],
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
                     "name": "Erathnet",
-                    "url": "https://www.erathnet.de/",
-                    "email": "administrator@erathnet.de"
+                    "email": "administrator@erathnet.de",
+                    "url": "https://www.erathnet.de/"
                 }
             ],
-            "home": "",
-            "icon": "",
             "sources": [],
-            "keywords": [
-                "dhcp"
-            ]
+            "type": "application",
+            "version": "1.0.0"
         },
-        "app_metadata": {},
+        "healthy": true,
+        "healthy_error": null,
+        "human_version": "2024.1.20_1.0.0",
+        "last_update": "2024-01-20 18:00:00",
+        "location": "/__w/charts/dhcp/1.0.0",
+        "required_features": [],
         "schema": {
             "groups": [
                 {
@@ -81,6 +79,8 @@
                     }
                 }
             ]
-        }
+        },
+        "supported": true,
+        "version": "1.0.0"
     }
 }
