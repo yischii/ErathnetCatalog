@@ -30,12 +30,10 @@ resources:
     memory: 32M
 
 service:
-  ExternalName:
   name: dhcp
   port: 67
   protocol: UDP
-  targetPort: 67
-  type: ExternalName
+  type: NodePort
 
 volumeMounts:
   readOnly: true
