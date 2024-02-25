@@ -1,3 +1,5 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
 {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" .Values.persistance) }}
 spec:
   storageClasName: dataHDD
