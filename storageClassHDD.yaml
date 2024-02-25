@@ -1,17 +1,14 @@
-allowVolumeExpansion: true
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
+  name: dataHDD
   annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-  creationTimestamp: "2024-02-21T18:15:41Z"
-  name: openebs-zfspv-default
-  resourceVersion: "45205"
-  uid: cc5ba48b-5584-44d4-80c2-14fe2b88623d
+    storageclass.kubernetes.io/is-default-class: "false"
+allowVolumeExpansion: true
 parameters:
   fstype: zfs
-  poolname: home-vm_data/ix-applications/default_volumes
+  poolname: home-vm_dataHDD
   shared: "yes"
 provisioner: zfs.csi.openebs.io
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate

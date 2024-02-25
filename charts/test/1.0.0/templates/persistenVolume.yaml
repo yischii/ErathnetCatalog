@@ -1,0 +1,5 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- $_ := mustMergeOverwrite .Values (include "test.persistence" $ | fromYaml) -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}
