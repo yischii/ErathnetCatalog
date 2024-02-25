@@ -1,0 +1,17 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  creationTimestamp: "2024-02-21T18:15:41Z"
+  name: openebs-zfspv-default
+  resourceVersion: "45205"
+  uid: cc5ba48b-5584-44d4-80c2-14fe2b88623d
+parameters:
+  fstype: zfs
+  poolname: home-vm_data/ix-applications/default_volumes
+  shared: "yes"
+provisioner: zfs.csi.openebs.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate

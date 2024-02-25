@@ -30,12 +30,3 @@ service:
   port: 2500
   protocol: TCP
   targetPort: 80
-
-  persistence:
-    pvc-vol:
-      enabled: true
-      type: ix-zfs-pvc
-      accessModes: ReadWriteOnce
-      retain: false
-      size: 2G
-      targetSelectAll: true
