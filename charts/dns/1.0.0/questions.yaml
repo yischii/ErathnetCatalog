@@ -1,19 +1,22 @@
 groups:
-  - name: "Network"
-    description: "Network configuration for DNS server"
-  - name: "Storage"
-    description: "Storage configuration fpr DNS server"
+  - name: Network
+    description: Network configuration for DNS server
+  - name: Storage
+    description: Storage configuration fpr DNS server
 
 questions:
   - variable: network
-    label: "Network interface for DNS server"
-    description: "Select the network interface for DNS server to listen on"
-    group: "Network"
+    label: Network configuration for DNS server
+    group: Network
     schema:
-      type: string
-      required: true
-      $ref:
-        - "definitions/interface"
+      type: dict
+      attrs:
+        - variable: ipAddress
+          label: IP address for DNS server
+          description: Define the ip address for DNS server
+          schema:
+            type: ipaddr
+            required: true
   - variable: volume
     label: "Data volume for DNS server"
     group: "Storage"

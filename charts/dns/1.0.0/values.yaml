@@ -6,14 +6,14 @@ autoscaling:
 
 image:
   repository: yischi/dns
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 podAnnotations: {
-  "Release": "Stable",
+  "App": "Named DNS Server",
   "Environment": "Production",
-  "Tier": "Backend",
+  "Release": "Stable",
   "Service": "DNS",
-  "App": "Named DNS Server"
+  "Tier": "Backend"
 }
 
 replicaCount: 1
@@ -27,8 +27,7 @@ resources:
     memory: 32M
 
 service:
-  type: NodePort
+  name: dns
   port: 53
-  targetPort: 53
   protocolTCP: TCP
   prorocolUDP: UDP
