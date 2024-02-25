@@ -8,6 +8,14 @@ image:
   repository: nginx
   pullPolicy: Always
 
+persistance:
+  persistentVolume:
+    accessMode: ReadWriteOnce
+    enabled: true
+    retain: true
+    size: 2G
+    type: pvc
+
 podAnnotations: {
   "Release": "Stable",
   "Environment": "Test",
