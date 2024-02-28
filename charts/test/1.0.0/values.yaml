@@ -14,14 +14,8 @@ persistence:
     enabled: true
     retain: true
     size: 2G
-    storageClassName: persistenVolume
+    storageClassName: persistentVolume
     type: pvc
-  testvol:
-    accessMode: ReadWriteOnce
-    enabled: true
-    retain: true
-    size: 1G
-    type: ix-zfs-pvc
 
 podAnnotations: {
   "Release": "Stable",
