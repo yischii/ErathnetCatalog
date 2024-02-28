@@ -6,4 +6,3 @@ spec:
   storageClassName: testoverwrite
 {{- end -}}
 
-{{- include "ix.v1.common.loader.apply" . -}}
