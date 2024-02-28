@@ -12,15 +12,13 @@ persistence:
   persistentvolume:
     accessMode: ReadWriteOnce
     enabled: true
-    name: hdddata
     retain: true
     size: 2G
-    storageClassName: testStorageClass
+    storageClassName: persistenVolume
     type: pvc
   testvol:
     accessMode: ReadWriteOnce
     enabled: true
-    name: ixzfspvc
     retain: true
     size: 1G
     type: ix-zfs-pvc
