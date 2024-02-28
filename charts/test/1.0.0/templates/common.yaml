@@ -1,0 +1,9 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{- include "test.pv" (list . "test.persistentvolume" ) -}}
+{{- define "test.persistentvolume" -}}
+spec:
+  storageClassName: testOverwrite
+{{- end -}}
+
+{{- include "ix.v1.common.loader.apply" . -}}

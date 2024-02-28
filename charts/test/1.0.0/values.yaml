@@ -8,13 +8,22 @@ image:
   repository: nginx
   pullPolicy: Always
 
-persistance:
-  persistentVolume:
+persistence:
+  persistentvolume:
     accessMode: ReadWriteOnce
     enabled: true
+    name: hdddata
     retain: true
     size: 2G
+    storageClassName: testStorageClass
     type: pvc
+  testvol:
+    accessMode: ReadWriteOnce
+    enabled: true
+    name: ixzfspvc
+    retain: true
+    size: 1G
+    type: ix-zfs-pvc
 
 podAnnotations: {
   "Release": "Stable",
@@ -35,6 +44,17 @@ resources:
     memory: 32M
 
 service:
-  port: 2500
-  protocol: TCP
-  targetPort: 80
+  http:
+    enabled: true
+    externalIPs:
+      - 192.168.6.48
+    ipFamilies:
+      - IPv4
+    primary: true
+    ports:
+      http:
+        enabled: true
+        port: 2500
+        primary: true
+        protocol: TCP
+        targetPort: 80
