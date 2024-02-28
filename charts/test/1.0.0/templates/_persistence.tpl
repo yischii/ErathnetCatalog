@@ -1,5 +1,5 @@
 {{- define "test.pv.tpl" -}}
-{{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" .Values.persistence) }}
+{{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" .Values.persistence.persistentvolume) }}
 {{- end -}}
 
 {{- define "test.pv" -}}
