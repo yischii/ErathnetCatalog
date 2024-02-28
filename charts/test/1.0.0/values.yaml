@@ -8,7 +8,7 @@ image:
   repository: nginx
   pullPolicy: Always
 
-persistence1:
+persistence:
   persistentvolume:
     accessMode: ReadWriteOnce
     enabled: true
@@ -17,8 +17,6 @@ persistence1:
     size: 2G
     storageClassName: testStorageClass
     type: pvc
-
-persistence:
   testvol:
     accessMode: ReadWriteOnce
     enabled: true
