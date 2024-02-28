@@ -3,7 +3,7 @@
 {{- include "test.pv" (list . "test.persistentvolume" ) -}}
 {{- define "test.persistentvolume" -}}
 spec:
-  storageClassName: testOverwrite
+  storageClassName: testoverwrite
 {{- end -}}
 
 {{- include "ix.v1.common.loader.apply" . -}}
