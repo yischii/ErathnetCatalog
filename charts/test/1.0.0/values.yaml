@@ -12,7 +12,7 @@ persistence:
   persistentvolume:
     accessMode: ReadWriteOnce
     enabled: true
-    name: persistentVolume
+    name: persistentvolume
     retain: true
     size: 2G
     storageClassName: persistentVolume
