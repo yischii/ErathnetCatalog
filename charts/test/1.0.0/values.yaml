@@ -56,5 +56,5 @@ service:
         enabled: true
         port: 2500
         primary: true
-        protocol: TCP
+        protocol: tcp
         targetPort: 80
