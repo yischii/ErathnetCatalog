@@ -12,10 +12,8 @@ persistence:
   persistentvolume:
     accessModes: ReadWriteOnce
     enabled: true
-    name: persistentvolume
     retain: true
     size: 2G
-    storageClassName: testclass
     targetSelectAll: true
     type: pvc
 
