@@ -10,12 +10,13 @@ image:
 
 persistence:
   persistentvolume:
-    accessMode: ReadWriteOnce
+    accessModes: ReadWriteOnce
     enabled: true
     name: persistentvolume
     retain: true
     size: 2G
-    storageClassName: persistentVolume
+    storageClassName: testclass
+    targetSelectAll: true
     type: pvc
 
 podAnnotations: {

@@ -85,6 +85,24 @@
 
           {{/* Create the PV */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
+
+        {{- else if eq $objectData.type "pvc" -}}
+          {{- if $objectData.storageClassName }}
+            {{- $size := $objectData.size | default $.Values.fallbackDefaults.pvcSize -}}
+            {{- $hashValues := (printf "%s-%s-%s" $size $objectData.storageClassName $objectData.accessModes) -}}
+            {{/* Create a unique name taking into account storageClassName,
+                without this, changing one of those values is not possible */}}
+            {{- $hash := adler32sum $hashValues -}}
+            {{- $_ := set $objectData "name" (printf "%s-%v" $objectName $hash) -}}
+
+            {{- $_ := set $objectData "provisioner" "zfs.csi.openebs.io" -}}
+            {{- $_ := set $objectData "driver" "zfs.csi.openebs.io" -}}
+            {{- $_ := set $objectData "storageClass" $objectData.storageClassName -}}
+            {{- $_ := set $objectData "volumeName" $objectData.name -}}
+
+            {{/* Create the PV */}}
+          {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
+          {{- end -}}
         {{- end -}}
 
         {{/* Call class to create the object */}}

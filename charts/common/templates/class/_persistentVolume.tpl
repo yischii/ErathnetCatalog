@@ -52,7 +52,7 @@ spec:
   capacity:
     storage: {{ $pvcSize }}
   persistentVolumeReclaimPolicy: {{ $reclaimPolicy }}
-  storageClassName: {{ $objectData.name }}
+  {{- include "ix.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume Claim") | trim | nindent 2 }}
   accessModes:
     {{- include "ix.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume") | trim | nindent 4 -}}
   {{- if $objectData.mountOptions }}
