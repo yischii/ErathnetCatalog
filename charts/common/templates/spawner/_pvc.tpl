@@ -88,6 +88,8 @@
 
         {{- else if eq $objectData.type "pvc" -}}
           {{- if $objectData.storageClassName }}
+            {{/* Validate PVC CSI */}}
+            {{/*- include "ix.v1.common.lib.storage.pvcCSI.validation" (dict "rootCtx $ "objectData" $objectData) -*/}}
             {{- $size := $objectData.size | default $.Values.fallbackDefaults.pvcSize -}}
             {{- $hashValues := (printf "%s-%s-%s" $size $objectData.storageClassName $objectData.accessModes) -}}
             {{/* Create a unique name taking into account storageClassName,
@@ -101,7 +103,7 @@
             {{- $_ := set $objectData "volumeName" $objectData.name -}}
 
             {{/* Create the PV */}}
-          {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
+            {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
           {{- end -}}
         {{- end -}}
 
