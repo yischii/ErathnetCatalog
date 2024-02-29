@@ -1,12 +1,12 @@
 {{/* PVC CSI */}}
 {{/* Call this template:
-{{ include "ix.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "ix.v1.common.lib.storage.pvcCSI" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
   driver: The name of the driver.
-  server: The server address.
-  share: The share to the NFS share.
+  fsType: The type of the file system
+  
 */}}
 {{- define "ix.v1.common.lib.storage.nfsCSI" -}}
   {{- $rootCtx := .rootCtx -}}

@@ -9,11 +9,14 @@ image:
   pullPolicy: Always
 
 persistence:
-  ixvolume:
-    datasetName: test
+  persistentvolume:
+    accessModes: ReadWriteOnce
     enabled: true
-    hostPath: DirectoryOrCreate
-    type: ixVolume
+    retain: true
+    size: 2G
+    storageClass: hdddata
+    targetSelectAll: true
+    type: pvc
 
 podAnnotations: {
   "Release": "Stable",
