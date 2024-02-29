@@ -15,7 +15,7 @@ persistence:
     retain: true
     size: 2G
     targetSelectAll: true
-    type: pvc
+    type: ix-zfs-pvc
 
 podAnnotations: {
   "Release": "Stable",
