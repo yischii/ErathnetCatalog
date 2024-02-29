@@ -14,7 +14,7 @@ persistence:
     enabled: true
     retain: true
     size: 2G
-    storageClass: openebs-zfspv-default
+    storageClass: data-hdd
     targetSelectAll: true
     type: pvc
 
