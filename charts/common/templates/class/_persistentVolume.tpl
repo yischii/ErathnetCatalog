@@ -65,6 +65,8 @@ spec:
       {{- end -}}
     {{- end -}}
   {{- end -}}
+  {{/*- if eq "pvc" $objectData.type -}}
+    {{- include "ix.v1.common.lib.storage.pvcCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -*/}}
   {{- if eq "smb-pv-pvc" $objectData.type -}}
     {{- include "ix.v1.common.lib.storage.smbCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
   {{- else if eq "nfs-pv-pvc" $objectData.type -}}

@@ -14,8 +14,14 @@ persistence:
     enabled: true
     retain: true
     size: 2G
+    storageClass: hddData
     targetSelectAll: true
-    type: ix-zfs-pvc
+    type: pvc
+  ixvolume:
+    datasetName: testIxVolume
+    enabled: true
+    hostPath: DirectoryOrCreate
+    type: ixVolume
 
 podAnnotations: {
   "Release": "Stable",
