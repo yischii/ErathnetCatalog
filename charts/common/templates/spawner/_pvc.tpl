@@ -91,11 +91,6 @@
             {{/* Validate PVC CSI */}}
             {{/*- include "ix.v1.common.lib.storage.pvcCSI.validation" (dict "rootCtx $ "objectData" $objectData) -*/}}
             {{- $size := $objectData.size | default $.Values.fallbackDefaults.pvcSize -}}
-            {{- $hashValues := (printf "%s-%s-%s" $size $objectData.storageClassName) -}}
-            {{/* Create a unique name taking into account storageClassName,
-                without this, changing one of those values is not possible */}}
-            {{- $hash := adler32sum $hashValues -}}
-            {{- $_ := set $objectData "name" (printf "%s-%v" $objectName $hash) -}}
 
             {{/*- $_ := set $objectData "provisioner" "zfs.csi.openebs.io" -}}
             {{- $_ := set $objectData "driver" "zfs.csi.openebs.io" -}}
