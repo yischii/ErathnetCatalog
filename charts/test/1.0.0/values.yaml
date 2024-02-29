@@ -9,16 +9,8 @@ image:
   pullPolicy: Always
 
 persistence:
-  persistentvolume:
-    accessModes: ReadWriteOnce
-    enabled: true
-    retain: true
-    size: 2G
-    storageClass: hdddata
-    targetSelectAll: true
-    type: pvc
   ixvolume:
-    datasetName: testIxVolume
+    datasetName: test
     enabled: true
     hostPath: DirectoryOrCreate
     type: ixVolume
