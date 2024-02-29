@@ -9,7 +9,7 @@ image:
   pullPolicy: Always
 
 persistence:
-  persistentvolume:
+  persistentvolumeclaim:
     accessModes: ReadWriteOnce
     enabled: true
     retain: true
@@ -17,6 +17,7 @@ persistence:
     storageClass: data-hdd
     targetSelectAll: true
     type: pvc
+    volumeName: persistentvolume
 
 podAnnotations: {
   "Release": "Stable",
