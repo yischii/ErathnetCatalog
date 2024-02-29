@@ -86,22 +86,6 @@
           {{/* Create the PV */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
 
-        {{- else if eq $objectData.type "pvc" -}}
-          {{- if $objectData.storageClassName }}
-            {{/* Validate PVC CSI */}}
-            {{/*- include "ix.v1.common.lib.storage.pvcCSI.validation" (dict "rootCtx $ "objectData" $objectData) -*/}}
-            {{- $size := $objectData.size | default $.Values.fallbackDefaults.pvcSize -}}
-
-            {{/*- $_ := set $objectData "provisioner" "zfs.csi.openebs.io" -}}
-            {{- $_ := set $objectData "driver" "zfs.csi.openebs.io" -}}
-            {{- $_ := set $objectData "volumeName" $objectData.name -*/}}
-            {{- $_ := set $objectData "storageClass" $objectData.storageClassName -}}
-
-            {{/* Create the PV }}
-            {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -*/}}
-          {{- end -}}
-        {{- end -}}
-
         {{/* Call class to create the object */}}
         {{- include "ix.v1.common.class.pvc" (dict "rootCtx" $ "objectData" $objectData) -}}
       {{- end -}}
