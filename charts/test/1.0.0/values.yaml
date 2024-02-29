@@ -14,7 +14,7 @@ persistence:
     enabled: true
     retain: true
     size: 2G
-    storageClass: hddData
+    storageClass: hdddata
     targetSelectAll: true
     type: pvc
   ixvolume:
