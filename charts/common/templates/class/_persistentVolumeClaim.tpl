@@ -10,7 +10,7 @@ objectData:
   size: The size of the PVC. (Default: 1Gi)
   volumeName: The name of the volume to bind to. (Default: "")
   retain: Whether to retain the PVC after deletion. (Default: false)
-  storageClass: The storage class to use. (Default: absent)
+  storageClassName: The storage class to use. (Default: absent)
 */}}
 
 {{- define "ix.v1.common.class.pvc" -}}
