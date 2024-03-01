@@ -1,6 +1,6 @@
 dependencies:
 - name: common
-  repository: file://../../common
+  repository: file://../../../../TrueNAS/library/common
   version: 1.2.9
-digest: sha256:a86c83de4906079a10283f249e737b8cef22fd258edb69b58211805760fe55b8
-generated: "2024-03-01T02:14:44.9995828+01:00"
+digest: sha256:eb717f768fd395eb0b0c13c254b68e40404e5070bf03eff6d190dea52b9acac0
+generated: "2024-03-01T02:50:29.6407512+01:00"
