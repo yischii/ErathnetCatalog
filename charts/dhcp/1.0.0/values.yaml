@@ -552,8 +552,9 @@ workload:
               enabled: false
               port: 8080
           securityContext:
+            readOnlyRootFilesystem: false
+            runAsGroup: 0
             runAsNonRoot: false
             runAsUser: 0
-            runAsGroup: 0
     replicas: 1
     type: Deployment
