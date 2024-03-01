@@ -544,5 +544,7 @@ workload:
             startup:
               enabled: false
               port: 8080
+          securityContext:
+            runAsNonRoot: false
     replicas: 1
     type: Deployment
