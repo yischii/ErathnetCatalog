@@ -488,8 +488,9 @@ configmap:
         }
 
 image:
-  repository: yischi/dhcp
   pullPolicy: Always
+  repository: yischi/dhcp
+  tag: 1.0.0
 
 persistence:
   configmap-conf:
@@ -512,7 +513,7 @@ service:
   dhcp:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      - "192.168.6.48"
     ipFamilies:
       - IPv4
     primary: true
@@ -527,6 +528,21 @@ workload:
   dhcp:
     enabled: true
     primary: true
-    podSpec: {}
+    podSpec:
+      containers:
+        dhcp:
+          enabled: true
+          imageSelector: image
+          primary: true
+          probes:
+            liveness:
+              enabled: false
+              port: 8080
+            readiness:
+              enables: false
+              port: 8080
+            startup:
+              enabled: false
+              port: 8080
     replicas: 1
     type: Deployment
