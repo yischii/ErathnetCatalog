@@ -552,6 +552,7 @@ workload:
               enabled: false
               port: 8080
           securityContext:
+            privileged: true
             readOnlyRootFilesystem: false
             runAsGroup: 0
             runAsNonRoot: false
