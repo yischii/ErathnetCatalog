@@ -12,7 +12,7 @@ persistence:
   persistentvolumeclaim:
     accessModes: ReadWriteOnce
     enabled: true
-    retain: true
+    retain: false
     size: 2G
     storageClass: data-hdd
     targetSelectAll: true
