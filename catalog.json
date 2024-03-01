@@ -1,7 +1,7 @@
 {
     "charts": {
         "dhcp": {
-            "app_readme": "<h1>ISC-DHCP-Server/h1>",
+            "app_readme": "ISC-DHCP-Server",
             "categories":[
                 "network"
             ],
