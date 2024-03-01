@@ -1,35 +1,35 @@
 {
     "charts": {
         "dhcp": {
-            "name": "dhcp",
-            "app_readme": "DHCP Server",
-            "categories": [
+            "name": "dns",
+            "app_readme": "<h1>ISC-DHCP-Server/h1>",
+            "categories":[
                 "network"
             ],
-            "description": "ISC-DHCP-Server",
-            "healthy": true,
-            "healthy_error": null,
-            "home": "",
-            "icon_url": "",
-            "latest_app_version": "2024.1.20",
-            "latest_human_version": "2024.1.20_1.0.0",
-            "last_update": "2024-01-20 18:00:00",
-            "latest_version": "1.0.0",
-            "location": "/__w/charts/dhcp",
+            "description": "DNS Server App for TrueNAS SCALE",
+            "type": "application",
+            "version": "1.0.0",
+            "apiVersion": "v2",
+            "appVersion": "2024.3.01",
+            "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
-                    "name": "Erathnet",
-                    "url": "https://www.erathnet.de/",
-                    "email": "administrator@erathnet.de"
+                    "name": "Sebastian Erath",
+                    "email": "sebastian@erathnet.de",
+                    "url": "https://www.erathnet.de/"
                 }
             ],
-            "recommended": false,
-            "screenshots": [],
-            "sources": [],
-            "tags": [
-                "DHCP"
+            "home": "https://github.com/yischii/ErathnetCatalog",
+            "icon": "https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.jpg",
+            "sources": [
+                "https://www.isc.org/dhcp/",
+                "https://hub.docker.com/r/yischi/dhcp",
+                "https://github.com/truenas/charts"
             ],
-            "title": "DHCP"
+            "keywords": [
+                "isc-dhcp-server",
+                "network"
+            ]
         },
         "dns": {
             "app_readme": "DNS Server",

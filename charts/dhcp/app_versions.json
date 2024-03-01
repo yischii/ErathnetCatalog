@@ -12,7 +12,7 @@
             },
             "apiVersion": "v2",
             "app_readme": "<h1>ISC-DHCP-Server/h1>",
-            "appVersion": "2024.1.20",
+            "appVersion": "2024.3.01",
             "dependencies": [
                 {
                     "name": "common",
