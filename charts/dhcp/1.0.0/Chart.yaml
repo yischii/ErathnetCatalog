@@ -22,3 +22,26 @@ version: 1.0.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.0.0"
+
+dependencies:
+  - name: common
+    repository: file://../../common
+    version: 1.2.9
+
+home: https://github.com/yischii/ErathnetCatalog
+
+icon: https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.jpg
+
+keyword:
+  - isc-dhcp-server
+  - network
+
+maintainers:
+  - name: Sebastian Erath
+    email: sebastian@erathnet.de
+    url: https://www.erathnet.de
+
+sources:
+  - https://www.isc.org/dhcp/
+  - https://hub.docker.com/r/yischi/dhcp
+  - https://github.com/truenas/charts

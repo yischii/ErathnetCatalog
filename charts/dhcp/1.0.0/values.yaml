@@ -1,15 +1,14 @@
-annotations: {
-  "App": "ISC-DHCP-Server",
-  "Environment": "Production",
-  "Release": "Stable",
-  "Service": "DHCP",
-  "Tier": "Backend"
-}
+global:
+  annotations: {
+    "App": "ISC-DHCP-Server",
+    "Environment": "Production",
+    "Release": "Stable",
+    "Service": "DHCP",
+    "Tier": "Backend"
+  }
 
 configmap:
-  config:
-    annotations:
-      keytpl: "{{ .Values.annotations }}"
+  conf:
     enabled: true
     data:
       ddns.key: |
@@ -491,6 +490,15 @@ image:
   repository: yischi/dhcp
   pullPolicy: Always
 
+persistence:
+  configmap-conf:
+    enabled: true
+    mountPath: /home-dhcp_conf
+    objectName: conf
+    readOnly: true
+    targetSelectAll: true
+    type: configmap
+
 resources:
   limits:
     ephemeral-storage: 64M
@@ -501,8 +509,6 @@ resources:
 
 service:
   dhcp:
-    annotations:
-      keytpl: "{{ .Values.annotations }}"
     enabled: true
     externalIPs:
       - "{{ .Values.network.ipAddress }}"
@@ -514,3 +520,11 @@ service:
         port: 67
         primary: true
         protocol: udp
+
+workload:
+  dhcp:
+    enabled: true
+    podSpec:
+    primary: true
+    replicas: 1
+    type: Deployment

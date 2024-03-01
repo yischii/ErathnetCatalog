@@ -85,6 +85,7 @@
 
           {{/* Create the PV */}}
           {{- include "ix.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) -}}
+        {{- end -}}
 
         {{/* Call class to create the object */}}
         {{- include "ix.v1.common.class.pvc" (dict "rootCtx" $ "objectData" $objectData) -}}

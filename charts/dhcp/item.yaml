@@ -1,4 +1,5 @@
+icon_url: https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.jpg
 categories:
   - network
 tags:
-  - DHCP
+  - ISC-DHCP-Server
