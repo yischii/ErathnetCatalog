@@ -492,6 +492,13 @@ image:
   repository: yischi/dhcp
   tag: 1.0.0
 
+notes:
+  footer: |
+    # Documentation
+    Documentation for this chart can be found at https://github.com/yischii/ErathnetCatalog
+    # Bug reports
+    If you find a bug in this chart, please send an e-mail to sebastian@erathnet.de
+
 persistence:
   configmap-conf:
     enabled: true
@@ -546,5 +553,7 @@ workload:
               port: 8080
           securityContext:
             runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
     replicas: 1
     type: Deployment
