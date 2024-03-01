@@ -552,5 +552,8 @@ workload:
             allowPrivilegeEscalation: true
             privileged: true
             readOnlyRootFilesystem: true
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
     replicas: 1
     type: Deployment
