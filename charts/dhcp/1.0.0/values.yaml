@@ -7,6 +7,7 @@ global:
     "Tier": "Backend"
   }
 
+
 configmap:
   conf:
     enabled: true
@@ -514,6 +515,7 @@ service:
       - "{{ .Values.network.ipAddress }}"
     ipFamilies:
       - IPv4
+    primary: true
     ports:
       dhcp:
         enabled: true
@@ -524,7 +526,7 @@ service:
 workload:
   dhcp:
     enabled: true
-    podSpec:
     primary: true
+    podSpec: {}
     replicas: 1
     type: Deployment
