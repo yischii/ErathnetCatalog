@@ -544,13 +544,10 @@ workload:
           probes:
             liveness:
               enabled: false
-              port: 8080
             readiness:
-              enables: false
-              port: 8080
+              enabled: false
             startup:
               enabled: false
-              port: 8080
           securityContext:
             allowPrivilegeEscalation: true
             privileged: true
