@@ -71,7 +71,7 @@
                                 "label": "IP address for DHCP server",
                                 "description": "Define the ip address for DHCP server",
                                 "schema": {
-                                    "type": "ipAddr",
+                                    "type": "ipaddr",
                                     "required": "true"
                                 }
                             }
