@@ -34,6 +34,7 @@ icon: https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.jpg
 
 keyword:
   - isc-dhcp-server
+  - dhcp
   - network
 
 maintainers:

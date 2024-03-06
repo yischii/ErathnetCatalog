@@ -13,5 +13,5 @@ questions:
           label: IP address for DHCP server
           description: Define the ip address for DHCP server
           schema:
-            type: ipaddr
+            type: ipAddr
             required: true

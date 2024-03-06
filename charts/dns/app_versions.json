@@ -1,86 +1,77 @@
 {
     "1.0.0": {
-        "healthy": true,
-        "supported": true,
-        "healthy_error": null,
-        "location": "/__w/charts/dns/1.0.0",
-        "last_update": "2024-01-20 18:00:00",
-        "required_features": [],
-        "human_version": "2024.1.20_1.0.0",
-        "version": "1.0.0",
+        "app_metadata": {},
         "chart_metadata": {
             "name": "dns",
-            "description": "DNS Server App for TrueNAS SCALE",
             "annotations": {
-                "App": "BIND DNS Server",
+                "App": "BIND9-DNS-Server",
                 "Environment": "Production",
                 "Release": "Stable",
                 "Service": "DNS",
                 "Tier": "Backend"
             },
-            "type": "application",
-            "version": "1.0.0",
             "apiVersion": "v2",
-            "appVersion": "2024.1.20",
+            "app_readme": "<h1>BIND9-DNS-Server/h1>",
+            "appVersion": "2024.3.01",
+            "dependencies": [
+                {
+                    "name": "common",
+                    "repository": "file://../../common",
+                    "version": "1.2.9"
+                }
+            ],
+            "description": "DNS Server App for TrueNAS SCALE",
+            "detailed_readme": "<h1>BIND9-DNS-Server</h1>",
+            "home": "https://github.com/yischii/ErathnetCatalog",
+            "icon": "https://github.com/yischii/Erathnet/blob/main/icons/bind.png",
+            "keywords": [
+                "bind9-dns-server",
+                "dns",
+                "network"
+            ],
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
                 {
-                    "name": "Erathnet",
-                    "url": "https://www.erathnet.de/",
-                    "email": "administrator@erathnet.de"
+                    "name": "Sebastian Erath",
+                    "email": "sebastian@erathnet.de",
+                    "url": "https://www.erathnet.de/"
                 }
             ],
-            "home": "",
-            "icon": "",
-            "sources": [],
-            "keywords": [
-                "dns"
-            ]
+            "sources": [
+                "https://www.isc.org/bind/",
+                "https://hub.docker.com/r/yischi/dns",
+                "https://github.com/truenas/charts"
+            ],
+            "type": "application",
+            "version": "1.0.0"
         },
-        "app_metadata": {},
+        "healthy": true,
+        "healthy_error": null,
+        "human_version": "2024.3.01_1.0.0",
+        "last_update": "2024-03-01 00:00:00",
+        "location": "/__w/charts/dns/1.0.0",
+        "required_features": [],
         "schema": {
             "groups": [
                 {
                     "name": "Network",
                     "description": "Network configuration for DNS server"
-                },
-                {
-                    "name": "Storage",
-                    "description": "Storage configuration fpr DNS server"
                 }
             ],
             "questions": [
                 {
                     "variable": "network",
-                    "label": "Network interface for DNS server",
-                    "description": "Select the network interface for DNS server to listen on",
+                    "label": "Network configuration for DNS server",
                     "group": "Network",
                     "schema": {
-                        "type": "string",
-                        "required": "true",
-                        "$ref": [
-                            "definitions/interface"
-                        ]
-                    }
-                },
-                {
-                    "variable": "volume",
-                    "label": "Data storage volume for DNS server",
-                    "description": "Select the data storage volume for DNS server",
-                    "group": "Storage",
-                    "schema": {
                         "type": "dict",
-                        "required": "true",
-                        "$ref": [
-                            "normalize/ixVolume"
-                        ],
                         "attrs": [
                             {
-                                "variable": "datasetName",
-                                "label": "Dataset Name",
-                                "description": "Define the dataset name for the data storage volume for DNS server",
+                                "variable": "ipAddress",
+                                "label": "IP address for DNS server",
+                                "description": "Define the ip address for DNS server",
                                 "schema": {
-                                    "type": "string",
+                                    "type": "ipaddr",
                                     "required": "true"
                                 }
                             }
@@ -88,6 +79,8 @@
                     }
                 }
             ]
-        }
+        },
+        "supported": true,
+        "version": "1.0.0"
     }
 }

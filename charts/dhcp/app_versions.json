@@ -23,9 +23,10 @@
             "description": "DHCP Server App for TrueNAS SCALE",
             "detailed_readme": "<h1>ISC-DHCP-Server</h1>",
             "home": "https://github.com/yischii/ErathnetCatalog",
-            "icon": "https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.jpg",
+            "icon": "https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.png",
             "keywords": [
                 "isc-dhcp-server",
+                "dhcp",
                 "network"
             ],
             "kubeVersion": ">=1.16.0-0",
@@ -60,7 +61,7 @@
             "questions": [
                 {
                     "variable": "network",
-                    "label": "Network interface for DHCP server",
+                    "label": "Network configuration for DHCP server",
                     "group": "Network",
                     "schema": {
                         "type": "dict",
@@ -68,9 +69,9 @@
                             {
                                 "variable": "ipAddress",
                                 "label": "IP address for DHCP server",
-                                "description": "Select the ip address for DHCP server",
+                                "description": "Define the ip address for DHCP server",
                                 "schema": {
-                                    "type": "string",
+                                    "type": "ipAddr",
                                     "required": "true"
                                 }
                             }

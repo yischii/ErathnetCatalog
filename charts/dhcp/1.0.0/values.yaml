@@ -18,7 +18,7 @@ configmap:
             secret "Dm690ouX47i2+yW4z72sVQ==";
         };
       dhcpd.conf: |
-        include "home-dhcp_conf/ddns.key";
+        include "/etc/dhcp/ddns.key";
 
         ddns-updates on;
         ddns-update-style interim;
@@ -48,11 +48,10 @@ configmap:
         authoritative;
 
         # Server subnet
-        # Test
-        subnet 0.0.0.0 netmask 0.0.0.0 {
+        # VLAN 10
+        subnet 10.1.1.0 netmask 255.255.255.0 {
         }
 
-        # VLAN 10
         subnet 192.168.2.0 netmask 255.255.255.224 {
         }
 
@@ -500,11 +499,20 @@ notes:
 persistence:
   configmap-conf:
     enabled: true
-    mountPath: /home-dhcp_conf
+    mountPath: /etc/dhcp
     objectName: conf
     readOnly: true
     targetSelectAll: true
     type: configmap
+  persistentvolume-data:
+    persistentvolume-data:
+    accessModes: ReadWriteOnce
+    enabled: true
+    mountPath: /var/lib/dhcp/
+    retain: true
+    size: 8M
+    targetSelectAll: true
+    type: pvc
 
 resources:
   limits:
@@ -518,7 +526,7 @@ service:
   dhcp:
     enabled: true
     externalIPs:
-      - "192.168.6.48"
+      - 192.168.6.48
     ipFamilies:
       - IPv4
     primary: true
@@ -547,13 +555,39 @@ workload:
             startup:
               enabled: false
           securityContext:
-            allowPrivilegeEscalation: false
             capabilities:
-              add: ["NET_RAW", "CHOWN", "SETGID", "SETUID"]
-            privileged: false
+              add:
+                #- BPF
+                - CHOWN
+                #- DAC_OVERRIDE
+                #- DAC_READ_SEARCH
+                #- FOWNER
+                #- FSETID
+                #- KILL
+                #- LEASE
+                #- MKNOD
+                #- NET_ADMIN
+                #- NET_BIND_SERVICE
+                #- NET_BROADCAST
+                - NET_RAW
+                #- PERFORM
+                - SETGID
+                #- SETFCAP
+                #- SETPCAP
+                - SETUID
+                #- SYS_ADMIN
+                #- SYS_CHROOT
+                #- SYS_MODULE
+                #- SYS_NICE
+                #- SYS_PACCT
+                #- SYS_PTRACE
+                #- SYS_RAWIO
+                #- SYS_RESOURCE
             readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
+            runAsGroup: 568
+            runAsNonRoot: true
+            runAsUser: 568
+      pod:
+        fsGroup: 101
     replicas: 1
     type: Deployment

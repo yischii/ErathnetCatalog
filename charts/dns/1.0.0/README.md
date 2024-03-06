@@ -1,3 +1,1 @@
-DNS 
-
-Bind DNS Server
+BIND DNS Server
