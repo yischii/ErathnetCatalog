@@ -306,7 +306,7 @@ global:
 image:
   pullPolicy: Always
   repository: php
-  tag: 1.0.0
+  tag: 8.2.17-apache
 
 notes:
   footer: |

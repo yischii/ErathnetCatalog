@@ -55,7 +55,7 @@
             "description": "Web Server App for TrueNAS SCALE",
             "detailed_readme": "<h1>Apache Server Server</h1>",
             "home": "https://github.com/yischii/ErathnetCatalog",
-            "icon": "https://github.com/yischii/Erathnet/blob/main/icons/Apache.png",
+            "icon": "https://github.com/yischii/Erathnet/blob/main/icons/web.png",
             "keywords": [
                 "Apache Web Server",
                 "Web"
@@ -70,7 +70,7 @@
             ],
             "name": "web",
             "sources": [
-                "https://www.Apache.org/",
+                "https://httpd.apache.org/",
                 "https://hub.docker.com/r/yischi/web",
                 "https://github.com/truenas/charts"
             ],
