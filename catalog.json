@@ -1,11 +1,11 @@
 {
     "charts": {
         "dhcp": {
-            "app_readme": "ISC-DHCP-Server",
+            "app_readme": "ISC DHCP Server",
             "categories":[
                 "network"
             ],
-            "description": "DNS Server App for TrueNAS SCALE",
+            "description": "DHCP Server App for TrueNAS SCALE",
             "healthy": true,
             "healthy_error": null,
             "home": "https://github.com/yischii/ErathnetCatalog",
@@ -31,25 +31,26 @@
                 "https://github.com/truenas/charts"
             ],
             "tags": [
-                "DHCP"
+                "DHCP",
+                "Network"
             ],
-            "title": "DHCP"
+            "title": "DHCP Server"
         },
         "dns": {
-            "app_readme": "DNS Server",
+            "app_readme": "Bind9 DNS Server",
             "categories": [
                 "network"
             ],
-            "description": "Named DNS Server",
+            "description": "DNS Server App for TrueNAS SCALE",
             "healthy": true,
             "healthy_error": null,
-            "home": "",
-            "icon_url": "",
+            "home": "https://github.com/yischii/ErathnetCatalog",
+            "icon_url": "https://github.com/yischii/Erathnet/blob/main/icons/bind.png",
             "location": "/__w/charts/dns",
             "latest_version": "1.0.0",
-            "latest_app_version": "2024.1.20",
-            "latest_human_version": "2024.1.20_1.0.0",
-            "last_update": "2024-01-20 18:00:00",
+            "latest_app_version": "2024.3.01",
+            "latest_human_version": "2024.3.01_1.0.0",
+            "last_update": "2024-03-01 00:00:00",
             "maintainers": [
                 {
                     "name": "Erathnet",
@@ -60,29 +61,32 @@
             "name": "dns",
             "recommended": true,
             "screenshots": [],
-            "sources": [],
+            "sources": [
+                "https://www.isc.org/bind/",
+                "https://hub.docker.com/r/yischi/dns",
+                "https://github.com/truenas/charts"
+            ],
             "tags": [
-                "DNS"
+                "DNS",
+                "Network"
             ],
-            "title": "DNS"
+            "title": "DNS Server"
         },
-        "test": {
-            "app_readme": "Test Server",
+        "web": {
+            "app_readme": "Apache Web Server",
             "categories": [
-                "network"
+                "web"
             ],
-            "description": "NGINX Server App for TrueNAS SCALE",
+            "description": "Apache Web Server App for TrueNAS SCALE",
             "healthy": true,
             "healthy_error": null,
-            "home": "",
-            "location": "/__w/charts/test",
+            "home": "https://github.com/yischii/ErathnetCatalog",
+            "icon_url": "https://github.com/yischii/Erathnet/blob/main/icons/web.png",
+            "location": "/__w/charts/web",
             "latest_version": "1.0.0",
-            "latest_app_version": "2024.1.20",
-            "latest_human_version": "2024.1.20_1.0.0",
-            "last_update": "2024-01-20 18:00:00",
-            "name": "test",
-            "recommended": false,
-            "title": "TEST",
+            "latest_app_version": "2024.3.01",
+            "latest_human_version": "2024.3.01_1.0.0",
+            "last_update": "2024-03-01 00:00:00",
             "maintainers": [
                 {
                     "name": "Erathnet",
@@ -90,12 +94,18 @@
                     "email": "administrator@erathnet.de"
                 }
             ],
-            "tags": [
-                "TEST"
-            ],
+            "name": "web",
+            "recommended": true,
             "screenshots": [],
-            "sources": [],
-            "icon_url": ""
+            "sources": [
+                "https://httpd.apache.org/",
+                "https://hub.docker.com/r/yischi/web",
+                "https://github.com/truenas/charts"
+            ],
+            "tags": [
+                "Web"
+            ],
+            "title": "Web Server"
         }
     }
 }

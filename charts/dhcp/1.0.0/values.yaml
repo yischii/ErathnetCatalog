@@ -1,13 +1,3 @@
-global:
-  annotations: {
-    "App": "ISC-DHCP-Server",
-    "Environment": "Production",
-    "Release": "Stable",
-    "Service": "DHCP",
-    "Tier": "Backend"
-  }
-
-
 configmap:
   conf:
     enabled: true
@@ -484,6 +474,15 @@ configmap:
           }
         }
 
+global:
+  annotations: {
+    "App": "ISC DHCP Server",
+    "Environment": "Production",
+    "Release": "Stable",
+    "Service": "DHCP",
+    "Tier": "Backend"
+  }
+
 image:
   pullPolicy: Always
   repository: yischi/dhcp
@@ -509,10 +508,12 @@ persistence:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/lib/dhcp/
-    retain: true
     size: 8M
+    retain: true
+    storageClassName: home-vm_dataHDD
     targetSelectAll: true
     type: pvc
+    volumeName: dhcp
 
 resources:
   limits:
@@ -557,37 +558,14 @@ workload:
           securityContext:
             capabilities:
               add:
-                #- BPF
                 - CHOWN
-                #- DAC_OVERRIDE
-                #- DAC_READ_SEARCH
-                #- FOWNER
-                #- FSETID
-                #- KILL
-                #- LEASE
-                #- MKNOD
-                #- NET_ADMIN
-                #- NET_BIND_SERVICE
-                #- NET_BROADCAST
+                - DAC_OVERRIDE
                 - NET_RAW
-                #- PERFORM
                 - SETGID
-                #- SETFCAP
-                #- SETPCAP
                 - SETUID
-                #- SYS_ADMIN
-                #- SYS_CHROOT
-                #- SYS_MODULE
-                #- SYS_NICE
-                #- SYS_PACCT
-                #- SYS_PTRACE
-                #- SYS_RAWIO
-                #- SYS_RESOURCE
             readOnlyRootFilesystem: false
-            runAsGroup: 568
-            runAsNonRoot: true
-            runAsUser: 568
-      pod:
-        fsGroup: 101
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
     replicas: 1
     type: Deployment

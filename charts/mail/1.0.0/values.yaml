@@ -1,3 +1,13 @@
+global:
+  annotations: {
+    "App": "BIND9-DNS-Server",
+    "Environment": "Production",
+    "Release": "Stable",
+    "Service": "DNS",
+    "Tier": "Backend"
+  }
+
+
 configmap:
   conf:
     enabled: true
@@ -104,15 +114,6 @@ configmap:
           algorithm hmac-sha256;
           secret "8sGKidri4SX4bdCB+XpHZwTR+GCG7+wArPpOrVHM2LA=";
         };
-
-global:
-  annotations: {
-    "App": "BIND9 DNS Server",
-    "Environment": "Production",
-    "Release": "Stable",
-    "Service": "DNS",
-    "Tier": "Backend"
-  }
 
 image:
   pullPolicy: Always

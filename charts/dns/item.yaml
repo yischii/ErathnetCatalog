@@ -2,4 +2,5 @@ icon_url: https://github.com/yischii/Erathnet/blob/main/icons/bind.png
 categories:
   - network
 tags:
+  - BIND9 DNS Server
   - DNS

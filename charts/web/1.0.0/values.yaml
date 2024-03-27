@@ -1,0 +1,423 @@
+configmap:
+  conf:
+    enabled: true
+    data:
+      erathnet.conf: |
+        <VirtualHost *:80>
+          ServerName www.erathnet.de
+          ServerAlias erathnet.de intra.erathnet.de intra home-web.erathnet.de home-web
+
+          Redirect permanent / https://www.erathnet.de/
+        </VirtualHost>
+        <VirtualHost *:80>
+          ServerName mail.erathnet.de
+
+          Redirect permanent / https://mail.erathnet.de/
+        </VirtualHost>
+        <IfModule mod_ssl.c>
+          <AuthnProviderAlias ldap my-ldap>
+            AuthLDAPBindAuthoritative on
+            AuthLDAPURL "ldap://home-dc01.erathnet.de:389/OU=User,DC=erathnet,DC=de?sAMAccountName?sub?(objectClass=person)" NONE
+            AuthLDAPBindDN "CN=Bind,CN=Managed Service Accounts,DC=erathnet,DC=de"
+            AuthLDAPBindPassword MxNgzYbfZQY5EphkDY2S
+          </AuthnProviderAlias>
+          <AuthzProviderAlias ldap-group ldap-group-family "CN=Family,OU=Family,OU=User,DC=erathnet,DC=de">
+            AuthLDAPURL "ldap://home-dc01.erathnet.de:389/OU=User,DC=erathnet,DC=de" NONE
+            AuthLDAPBindDN "CN=Bind,CN=Managed Service Accounts,DC=erathnet,DC=de"
+            AuthLDAPBindPassword MxNgzYbfZQY5EphkDY2S
+            AuthLDAPGroupAttribute member
+            AuthLDAPGroupAttributeIsDN On
+            AuthLDAPMaxSubGroupDepth 0
+          </AuthzProviderAlias>
+          <VirtualHost _default_:443>
+            ServerName www.erathnet.de
+            ServerAlias erathnet.de intra.erathnet.de intra home-web.erathnet.de home-web
+
+            ServerAdmin administrator@erathnet.de
+            DocumentRoot /var/www/erathnet
+
+            # Login
+            # Start
+            <Directory /var/www/>
+              AuthName "Authentifizierung notwendig: Bitte anmelden!"
+              AuthType Basic
+              AuthBasicProvider my-ldap
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.3.64/27 192.168.6.32/27 192.168.6.64/27
+            </Directory>
+            # End
+
+            # Let's Encrypt
+            # Start
+            <Location /.well-known>
+              Satisfy any
+            </Location>
+            # End
+
+            # Certificate Authority
+            # Start
+            Alias /ca /var/www/ca
+
+            <Directory /var/www/ca>
+              Require ldap-group-family
+              Require ip 192.168.2 192.168.3.0/27 192.168.3.32/27 192.168.3.64/27 192.168.3.96/27 192.168.3.192/27 192.168.5 192.168.6.0/27 192.168.6.32/27 192.168.6.64/27 192.168.6.96/27
+            </Directory>
+            # End
+
+            # Exchange Server
+            # Start
+            Redirect permanent /mail https://mail.erathnet.de/
+            # End
+
+            # NextCloud
+            # Start
+            Alias /cloud /var/www/nextcloud
+
+            <Directory /var/www/nextcloud/>
+              Satisfy any
+              AllowOverride All
+              Options FollowSymLinks MultiViews
+              <IfModule mod_dav.c>
+                Dav off
+              </IfModule>
+            </Directory>
+            # End
+
+            # Open3a
+            # Start
+            Alias /rechnung /var/www/open3a
+
+            <Directory /var/www/open3a>
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.3.64/27 192.168.6.32/27 192.168.6.64/27
+            </Directory>
+            # End
+
+            # PDF Compressor
+            # Start
+            Alias /pdf /var/www/pdf_compressor
+
+            <Directory /var/www/pdf_compressor>
+              Require	ldap-group-family
+              Require	ip 192.168.3.32/27 192.168.3.64/27 192.168.6.32/27 192.168.6.64/27
+            </Directory>
+            # End
+
+            # PhpMyAdmin
+            # Start
+            Alias /phpmyadmin /usr/share/phpmyadmin
+
+            <Directory /usr/share/phpmyadmin>
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.6.32/27
+              
+              Options SymLinksIfOwnerMatch
+              DirectoryIndex index.php
+
+              # limit libapache2-mod-php to files and directories necessary by pma
+              <IfModule mod_php7.c>
+                php_admin_value upload_tmp_dir /var/lib/phpmyadmin/tmp
+                php_admin_value open_basedir /usr/share/phpmyadmin/:/usr/share/doc/phpmyadmin/:/etc/phpmyadmin/:/var/lib/phpmyadmin/:/usr/share/php/:/usr/share/javascript/
+              </IfModule>
+            </Directory>
+
+            # Disallow web access to directories that don't need it
+            <Directory /usr/share/phpmyadmin/templates>
+              Require all denied
+            </Directory>
+            <Directory /usr/share/phpmyadmin/libraries>
+              Require all denied
+            </Directory>
+            # End
+
+            # Printer
+            # Start
+            Redirect /printer https://home-cups.erathnet.de:631/
+
+            <Location /printer>
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.6.32/27
+            </Location>
+            # End
+
+            # Scan
+            # Start
+            Redirect /scan https://home-cups.erathnet.de/
+
+            <Location /scan>
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.3.64/27 192.168.6.32/27 192.168.6.64/27
+                </Location>
+            # End
+
+            # Surveillance
+            # Start
+            Redirect /surveillance https://home-surveillance.erathnet.de/
+
+            <Location /surveillance>
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.6.32/27
+            </Location>
+            # End
+
+            # Webalizer
+            # Start
+            Alias /webalizer /var/www/webalizer
+
+            <Directory /var/www/webalizer>
+              Require ldap-group-family
+              Require ip 192.168.3.32/27 192.168.6.32/27
+            </Directory>
+            # End
+            
+            # Proxy Settings
+            ProxyPreserveHost On
+            SSLProxyEngine On
+            SSLProxyVerify None
+            SSLProxyCheckPeerCN Off
+            SSLProxyCheckPeerName Off
+
+            SSLEngine on
+            SSLCertificateFile      /etc/letsencrypt/live/www.erathnet.de/fullchain.pem
+            SSLCertificateKeyFile   /etc/letsencrypt/live/www.erathnet.de/privkey.pem
+
+            Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains;"
+            <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                SSLOptions +StdEnvVars
+            </FilesMatch>
+            <Directory /usr/lib/cgi-bin>
+                SSLOptions +StdEnvVars
+            </Directory>
+          </VirtualHost>
+        </IfModule>
+        <IfModule mod_ssl.c>
+          <VirtualHost _default_:443>
+            ServerName mail.erathnet.de
+            ServerAdmin administrator@erathnet.de
+
+            Redirect /.well-known https://www.erathnet.de/.well-known
+            Redirect permanent / /owa
+
+            # Exchange Server
+            # Start
+            # Settings
+            Header always set X-Frame-Options SAMEORIGIN
+            Header set Server Apache
+            Header unset X-AspNet-Version
+            Header unset X-OWA-Version
+            Header unset X-Powered-By
+
+            # Nachfolgende Zeile löst den "Expectation Failed Apache 417" Fehler beim AutoDiscover etc.
+            RequestHeader unset Expect early
+
+            # Nachfolgende Zeilen sind um die Authentifizierung zu ermöglichen - NTLM-Funktioniert durch den Proxy nicht, deshalb Basis-Authentifizierung erzwingen
+            SetEnvIf User-Agent ".*MSIE.*" value BrowserMSIE
+            Header unset WWW-Authenticate
+            Header add WWW-Authenticate "Basic realm=mail.erathnet.de"
+
+            ProxyRequests Off
+
+            # Active Sync
+            ProxyPass /Microsoft-Server-ActiveSync https://home-exchange.erathnet.de/Microsoft-Server-ActiveSync
+            ProxyPassReverse /Microsoft-Server-ActiveSync https://home-exchange.erathnet.de/Microsoft-Server-ActiveSync
+
+            # Autodiscover
+            ProxyPass /autodiscover/autodiscover.xml https://home-exchange.erathnet.de/autodiscover/autodiscover.xml
+            ProxyPassReverse /autodiscover/autodiscover.xml https://home-exchange.erathnet.de/autodiscover/autodiscover.xml
+            ProxyPass /Autodiscover/Autodiscover.xml https://home-exchange.erathnet.de/autodiscover/autodiscover.xml
+            ProxyPassReverse /Autodiscover/Autodiscover.xml https://home-exchange.erathnet.de/autodiscover/autodiscover.xml
+
+            # Exchange Admin Center
+            #ProxyPass /ecp https://home-exchange/ecp
+            #ProxyPassReverse /ecp https://home-exchange/ecp
+
+            # Exchange MAPI
+            ProxyPass /mapi https://home-exchange.erathnet.de/mapi
+            ProxyPassReverse /mapi https://home-exchange.erathnet.de/mapi
+
+            # Exchange RPC
+            #OutlookAnywherePassthrough On
+            ProxyPass /rpc https://home-exchange.erathnet.de/rpc
+            ProxyPassReverse /rpc https://home-exchange.erathnet.de/rpc
+
+            # Outlook Web App
+            ProxyPass /owa https://home-exchange.erathnet.de/owa
+            ProxyPassReverse /owa https://home-exchange.erathnet.de/owa
+
+            # Proxy Settings
+            ProxyPreserveHost On
+            SSLProxyEngine On
+            SSLProxyVerify None
+            SSLProxyCheckPeerCN Off
+            SSLProxyCheckPeerName Off
+
+            SSLEngine on
+            SSLCertificateFile      /etc/letsencrypt/live/www.erathnet.de/fullchain.pem
+            SSLCertificateKeyFile   /etc/letsencrypt/live/www.erathnet.de/privkey.pem
+    
+            Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains;"
+            <FilesMatch "\.(cgi|shtml|phtml|php)$">
+              SSLOptions +StdEnvVars
+            </FilesMatch>
+            <Directory /usr/lib/cgi-bin>
+              SSLOptions +StdEnvVars
+            </Directory>
+          </VirtualHost>
+        </IfModule>
+      tinaerath.conf: |
+        <VirtualHost *:80>
+          ServerName www.tinaerath.de
+          ServerAlias tinaerath.de www.stuttgart-hundepension.de stuttgart-hundepension.de
+
+          Redirect permanent / https://www.tinaerath.de/
+        </VirtualHost>
+        <IfModule mod_ssl.c>
+          <VirtualHost _default_:443>
+            ServerName www.tinaerath.de
+            ServerAlias tinaerath.de www.stuttgart-hundepension.de stuttgart-hundepension.de
+
+            ServerAdmin administrator@erathnet.de
+            DocumentRoot /var/www/tinaerath
+
+            SSLEngine on
+            SSLCertificateFile	/etc/letsencrypt/live/www.tinaerath.de/fullchain.pem
+            SSLCertificateKeyFile	/etc/letsencrypt/live/www.tinaerath.de/privkey.pem
+
+            Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains;"
+
+            <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                SSLOptions +StdEnvVars
+            </FilesMatch>
+            <Directory /usr/lib/cgi-bin>
+                SSLOptions +StdEnvVars
+            </Directory>
+          </VirtualHost>
+        </IfModule>
+
+global:
+  annotations: {
+    "App": "Apache Web Server",
+    "Environment": "Production",
+    "Release": "Stable",
+    "Service": "DNS",
+    "Tier": "Backend"
+  }      
+
+image:
+  pullPolicy: Always
+  repository: php
+  tag: 8.2.17-apache
+
+notes:
+  footer: |
+    # Documentation
+    Documentation for this chart can be found at https://github.com/yischii/ErathnetCatalog
+    # Bug reports
+    If you find a bug in this chart, please send an e-mail to sebastian@erathnet.de
+
+persistence:
+  configmap-conf:
+    enabled: false
+    mountPath: /etc/apache2/sites-enabled/
+    objectName: conf
+    readOnly: true
+    targetSelectAll: true
+    #  web:
+    #    web-erathnet:
+    #      mountPath: /etc/apache2/sites-enabled/
+    #      subPath: erathnet.conf
+    #    web-tinaerath:
+    #      mountPath: /etc/apache2/sites-enabled/
+    #      subPath: tinaerath.conf
+    type: configmap
+  persistentvolume-data:
+    accessModes: ReadWriteOnce
+    enabled: true
+    mountPath: /var/www/
+    retain: true
+    pvSize: 32M
+    pvcSize: 16M
+    storageClassName: hostpath
+    targetSelectAll: true
+    type: pvc
+    volumeName: web
+
+resources:
+  limits:
+    ephemeral-storage: 64M
+    memory: 64M
+  requests:
+    ephemeral-storage: 32M
+    memory: 32M
+
+service:
+  web:
+    enabled: true
+    externalIPs:
+      - "192.168.6.49"
+    ipFamilies:
+      - IPv4
+    primary: true
+    ports:
+      http:
+        enabled: true
+        primary: true
+        port: 30100
+        protocol: http
+        targetPort: 80
+
+workload:
+  web:
+    enabled: true
+    primary: true
+    podSpec:
+      containers:
+        web-erathnet:
+          enabled: true
+          imageSelector: image
+          primary: true
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - NET_BIND_SERVICE
+                - NET_RAW
+                - SETGID
+                - SETUID
+            readOnlyRootFilesystem: false
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
+        #web-tinaerath:
+        #  enabled: true
+        #  imageSelector: image
+        #  primary: false
+        #  probes:
+        #    liveness:
+        #      enabled: false
+        #    readiness:
+        #      enabled: false
+        #    startup:
+        #      enabled: false
+        #  securityContext:
+        #    capabilities:
+        #      add:
+        #        - CHOWN
+        #        - DAC_OVERRIDE
+        #        - NET_RAW
+        #        - SETGID
+        #        - SETUID
+        #    readOnlyRootFilesystem: false
+        #    runAsGroup: 0
+        #    runAsNonRoot: false
+        #    runAsUser: 0  
+    replicas: 1
+    type: Deployment

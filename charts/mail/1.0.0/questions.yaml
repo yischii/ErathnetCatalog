@@ -1,0 +1,39 @@
+groups:
+  - name: Network
+    description: Network configuration for server server
+  - nmae: Certificate
+    description: Certificate configuration for mail server
+
+questions:
+  - variable: network
+    label: Network configuration for mail server
+    group: Network
+    schema:
+      type: dict
+      attrs:
+        - variable: ipAddress
+          label: IP address for mail server
+          description: Define the ip address for mail server
+          schema:
+            type: ipaddr
+            required: true
+  - variable: certificate
+    label: Certificate configuration for mail server
+    group: Certificate
+    schema:
+      type: dict
+      attrs:
+        - variable: rootCA
+          label: Root CA for mail server
+          description: Select the Root CA for mail server
+          schema:
+            type: int
+            $ref:
+              - "definitions/certificate"
+        - variable: certificate
+          label: Certificate for mail server
+          decription: Select the certificate for mail server
+          schema:
+            type: int
+            $ref:
+              - "definitions/certificate"

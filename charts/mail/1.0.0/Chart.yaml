@@ -1,6 +1,6 @@
 apiVersion: v2
-name: dhcp
-description: DHCP Helm chart for Erathnet Kubernetes
+name: mail
+description: A Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -30,12 +30,11 @@ dependencies:
 
 home: https://github.com/yischii/ErathnetCatalog
 
-icon: https://github.com/yischii/Erathnet/blob/main/icons/isc-dhcp.jpg
+icon: https://github.com/yischii/Erathnet/blob/main/icons/postfix.jpg
 
 keyword:
-  - ISC DHCP Server
-  - DHCP
-  - Network
+  - Postfix Mail Server
+  - Mail
 
 maintainers:
   - name: Sebastian Erath
@@ -43,6 +42,6 @@ maintainers:
     url: https://www.erathnet.de
 
 sources:
-  - https://www.isc.org/dhcp/
-  - https://hub.docker.com/r/yischi/dhcp
+  - https://www.postfix.org/
+  - https://hub.docker.com/r/yischi/mail
   - https://github.com/truenas/charts

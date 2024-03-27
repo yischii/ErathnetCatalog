@@ -1,0 +1,17 @@
+groups:
+  - name: Network
+    description: Network configuration for DHCP server
+
+questions:
+  - variable: network
+    label: Network configuration for DHCP server
+    group: Network
+    schema:
+      type: dict
+      attrs:
+        - variable: ipAddress
+          label: IP address for DHCP server
+          description: Define the ip address for DHCP server
+          schema:
+            type: ipaddr
+            required: true

@@ -33,9 +33,9 @@ home: https://github.com/yischii/ErathnetCatalog
 icon: https://github.com/yischii/Erathnet/blob/main/icons/bind.jpg
 
 keyword:
-  - bind9-dns-server
-  - dns
-  - network
+  - BIND9 DNS Server
+  - DNS
+  - Network
 
 maintainers:
   - name: Sebastian Erath

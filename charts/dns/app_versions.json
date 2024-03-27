@@ -1,17 +1,49 @@
 {
     "1.0.0": {
-        "app_metadata": {},
+        "app_metadata": {
+            "runAsContext": [
+                {
+                    "description": "DNS runs as root user.",
+                    "gid": 0,
+                    "groupName": "root",
+                    "uid": 0,
+                    "userName": "root"
+                }
+
+            ],
+            "capabilities": [
+                {
+                    "name": "CHOWN",
+                    "description": "DNS is able to change file ownership."
+                },
+                {
+                    "name": "DAC_OVERRIDE",
+                    "description": "DNS is able to bypass file permissions."
+                },
+                {
+                    "name": "NET_RAW",
+                    "description": "DNS is able to use raw sockets."
+                },
+                {
+                    "name": "SETGID",
+                    "description": "DNS is able to set gid."
+                },
+                {
+                    "name": "SETUID",
+                    "description": "DNS is able to set uid."
+                }
+            ]
+        },
         "chart_metadata": {
-            "name": "dns",
             "annotations": {
-                "App": "BIND9-DNS-Server",
+                "App": "BIND9 DNS Server",
                 "Environment": "Production",
                 "Release": "Stable",
                 "Service": "DNS",
                 "Tier": "Backend"
             },
             "apiVersion": "v2",
-            "app_readme": "<h1>BIND9-DNS-Server/h1>",
+            "app_readme": "<h1>BIND9 DNS Server/h1>",
             "appVersion": "2024.3.01",
             "dependencies": [
                 {
@@ -21,13 +53,13 @@
                 }
             ],
             "description": "DNS Server App for TrueNAS SCALE",
-            "detailed_readme": "<h1>BIND9-DNS-Server</h1>",
+            "detailed_readme": "<h1>BIND9 DNS Server</h1>",
             "home": "https://github.com/yischii/ErathnetCatalog",
             "icon": "https://github.com/yischii/Erathnet/blob/main/icons/bind.png",
             "keywords": [
-                "bind9-dns-server",
-                "dns",
-                "network"
+                "BIND9 DNS Server",
+                "DNS",
+                "Network"
             ],
             "kubeVersion": ">=1.16.0-0",
             "maintainers": [
@@ -37,6 +69,7 @@
                     "url": "https://www.erathnet.de/"
                 }
             ],
+            "name": "dns",
             "sources": [
                 "https://www.isc.org/bind/",
                 "https://hub.docker.com/r/yischi/dns",
