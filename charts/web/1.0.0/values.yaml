@@ -299,7 +299,7 @@ global:
     "App": "Apache Web Server",
     "Environment": "Production",
     "Release": "Stable",
-    "Service": "DNS",
+    "Service": "Web",
     "Tier": "Backend"
   }      
 
