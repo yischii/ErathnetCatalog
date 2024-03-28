@@ -340,7 +340,6 @@ persistence:
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: web
 
 resources:
   limits:

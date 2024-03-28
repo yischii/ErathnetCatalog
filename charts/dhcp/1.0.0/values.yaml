@@ -504,7 +504,6 @@ persistence:
     targetSelectAll: true
     type: configmap
   persistentvolume-data:
-    persistentvolume-data:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/lib/dhcp/
