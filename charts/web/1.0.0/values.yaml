@@ -334,7 +334,7 @@ persistence:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/www/
-    retain: true
+    retain: false
     size: 32M
     targetSelectAll: true
     type: pvc
