@@ -335,8 +335,7 @@ persistence:
     enabled: true
     mountPath: /var/www/
     retain: true
-    pvSize: 32M
-    pvcSize: 16M
+    size: 32M
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
