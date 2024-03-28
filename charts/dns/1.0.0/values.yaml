@@ -141,7 +141,7 @@ persistence:
     retain: true
     pvSize: 32M
     pvcSize: 16M
-    storageClassName: hostpath
+    storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
     volumeName: dns
