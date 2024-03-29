@@ -330,16 +330,16 @@ persistence:
     #      mountPath: /etc/apache2/sites-enabled/
     #      subPath: tinaerath.conf
     type: configmap
-  persistentvolume-data:
-    accessModes: ReadWriteOnce
-    enabled: true
-    mountPath: /var/www/
-    retain: false
-    size: 1G
-    storageClassName: data-hdd
-    targetSelectAll: true
-    type: pvc
-    volumeName: web
+  #persistentvolume-data:
+  #  accessModes: ReadWriteOnce
+  #  enabled: true
+  #  mountPath: /var/www/
+  #  re#tain: true
+  #  size: 1G
+  #  storageClassName: data-hdd
+  #  targetSelectAll: true
+  #  type: pvc
+  #  volumeName: web
 
 resources:
   limits:
@@ -353,7 +353,7 @@ service:
   web:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      - 1.1.1.1
     ipFamilies:
       - IPv4
     primary: true
@@ -383,40 +383,6 @@ workload:
             startup:
               enabled: false
           securityContext:
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-                - NET_BIND_SERVICE
-                - NET_RAW
-                - SETGID
-                - SETUID
             readOnlyRootFilesystem: false
-            #runAsGroup: 0
-            #runAsNonRoot: false
-            #runAsUser: 0
-        #web-tinaerath:
-        #  enabled: true
-        #  imageSelector: image
-        #  primary: false
-        #  probes:
-        #    liveness:
-        #      enabled: false
-        #    readiness:
-        #      enabled: false
-        #    startup:
-        #      enabled: false
-        #  securityContext:
-        #    capabilities:
-        #      add:
-        #        - CHOWN
-        #        - DAC_OVERRIDE
-        #        - NET_RAW
-        #        - SETGID
-        #        - SETUID
-        #    readOnlyRootFilesystem: false
-        #    runAsGroup: 0
-        #    runAsNonRoot: false
-        #    runAsUser: 0  
     replicas: 1
     type: Deployment

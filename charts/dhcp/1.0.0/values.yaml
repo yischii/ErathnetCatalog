@@ -555,16 +555,6 @@ workload:
             startup:
               enabled: false
           securityContext:
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-                - NET_RAW
-                - SETGID
-                - SETUID
             readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
     replicas: 1
     type: Deployment

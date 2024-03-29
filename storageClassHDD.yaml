@@ -10,5 +10,5 @@ parameters:
   poolname: home-vm_dataHDD/Kubernetes
   shared: "yes"
 provisioner: zfs.csi.openebs.io
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
