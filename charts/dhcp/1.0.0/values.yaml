@@ -39,7 +39,7 @@ configmap:
 
         # Server subnet
         # Kubernetes cluster
-        subnet 172.16.0.0 netmsak 255.255.0.0 {
+        subnet 172.16.0.0 netmask 255.255.0.0 {
         }
         # VLAN 10
         subnet 10.1.1.0 netmask 255.255.255.0 {
