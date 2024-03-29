@@ -359,7 +359,7 @@ service:
   web:
     enabled: true
     externalIPs:
-      - 1.1.1.1
+      - "{{ .Values.network.ipAddress }}"
     ipFamilies:
       - IPv4
     primary: true
