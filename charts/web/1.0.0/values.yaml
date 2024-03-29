@@ -332,14 +332,18 @@ persistence:
     type: configmap
   persistentvolume-data:
     accessModes: ReadWriteOnce
-    enabled: true
+    enabled: false
     mountPath: /var/www/
     retain: false
     size: 32M
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: web
+    volumeName: we
+  persistentvolume-data:
+    enabled: true
+    type: ixVolume
+    datasetName: home-vm_dataHDD/Kubernetes/web
 
 resources:
   limits:
