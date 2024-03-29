@@ -392,9 +392,9 @@ workload:
                 - SETGID
                 - SETUID
             readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
+            #runAsGroup: 0
+            #runAsNonRoot: false
+            #runAsUser: 0
         #web-tinaerath:
         #  enabled: true
         #  imageSelector: image
