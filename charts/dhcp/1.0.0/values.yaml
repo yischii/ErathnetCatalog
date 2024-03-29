@@ -511,7 +511,7 @@ persistence:
     enabled: true
     mountPath: /var/lib/dhcp/
     size: 8M
-    retain: true
+    retain: false
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
