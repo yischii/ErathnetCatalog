@@ -341,9 +341,11 @@ persistence:
     type: pvc
     volumeName: we
   persistentvolume-data:
-    enabled: true
-    type: ixVolume
     datasetName: home-vm_dataHDD/Kubernetes/web
+    enabled: true
+    mountPath: /var/www/
+    targetSelectAll: true
+    type: ixVolume
 
 resources:
   limits:
@@ -357,7 +359,7 @@ service:
   web:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      - 1.1.1.1
     ipFamilies:
       - IPv4
     primary: true
