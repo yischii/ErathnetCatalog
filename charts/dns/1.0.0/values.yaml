@@ -138,7 +138,7 @@ persistence:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/cache/bind
-    retain: true
+    retain: false
     size: 16M
     storageClassName: data-hdd
     targetSelectAll: true
