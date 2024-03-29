@@ -334,7 +334,7 @@ persistence:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/www/
-    re#tain: true
+    retain: true
     size: 1G
     storageClassName: data-hdd
     targetSelectAll: true
