@@ -317,7 +317,7 @@ notes:
 
 persistence:
   configmap-conf:
-    enabled: false
+    enabled: true
     mountPath: /etc/apache2/sites-enabled/
     objectName: conf
     readOnly: true
@@ -335,7 +335,7 @@ persistence:
     enabled: true
     mountPath: /var/www/
     retain: false
-    size: 32M
+    size: 1G
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc

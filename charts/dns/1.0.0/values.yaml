@@ -139,8 +139,7 @@ persistence:
     enabled: true
     mountPath: /var/cache/bind
     retain: true
-    pvSize: 32M
-    pvcSize: 16M
+    size: 16M
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
@@ -202,5 +201,5 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             runAsUser: 0
-    replicas: 1
+    replicas: 2
     type: Deployment
