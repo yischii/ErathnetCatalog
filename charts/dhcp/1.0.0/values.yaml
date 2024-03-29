@@ -38,7 +38,7 @@ configmap:
         authoritative;
 
         # Server subnet
-        # Cluster
+        # Kubernetes cluster
         subnet 172.16.0.0 netmsak 255.255.0.0 {
         }
         # VLAN 10
