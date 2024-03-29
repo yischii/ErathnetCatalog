@@ -330,16 +330,16 @@ persistence:
     #      mountPath: /etc/apache2/sites-enabled/
     #      subPath: tinaerath.conf
     type: configmap
-  #persistentvolume-data:
-  #  accessModes: ReadWriteOnce
-  #  enabled: true
-  #  mountPath: /var/www/
-  #  re#tain: true
-  #  size: 1G
-  #  storageClassName: data-hdd
-  #  targetSelectAll: true
-  #  type: pvc
-  #  volumeName: web
+  persistentvolume-data:
+    accessModes: ReadWriteOnce
+    enabled: true
+    mountPath: /var/www/
+    re#tain: true
+    size: 1G
+    storageClassName: data-hdd
+    targetSelectAll: true
+    type: pvc
+    volumeName: web
 
 resources:
   limits:
