@@ -33,16 +33,16 @@ configmap:
       named.conf.local: |
         include "/etc/bind/ddns.key";
 
-        zone "erathnet.de" IN { type master; file "/var/cache/bind/erathnet.de_zone"; allow-update { key ddns-update; dcs; }; };
-        zone "_msdcs.erathnet.de" IN { type master; file "/var/cache/bind/_msdcs.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "_sites.erathnet.de" IN { type master; file "/var/cache/bind/_sites.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "_tcp.erathnet.de" IN { type master; file "/var/cache/bind/_tcp.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "_udp.erathnet.de" IN { type master; file "/var/cache/bind/_udp.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "erathnet.de" IN { type master; file "/var/lib/erathnet.de_zone"; allow-update { key ddns-update; dcs; }; };
+        zone "_msdcs.erathnet.de" IN { type master; file "/var/lib/_msdcs.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "_sites.erathnet.de" IN { type master; file "/var/lib/_sites.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "_tcp.erathnet.de" IN { type master; file "/var/lib/_tcp.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "_udp.erathnet.de" IN { type master; file "/var/lib/_udp.erathnet.de_zone"; allow-update { dcs; }; };
         zone "stuttgart-hundepension.de" IN { type master; file "/var/lib/stuttgart-hundepension.de_zone"; };      
         zone "tinaerath.de" IN { type master; file "/var/lib/tinaerath.de_zone"; };
         zone "0.168.192.in-addr.arpa" IN { type master; file "/var/lib/0.168.192.in-addr.arpa_zone"; };
-        zone "2.168.192.in-addr.arpa" IN { type master; file "/var/cache/bind/2.168.192.in-addr.arpa_zone"; allow-update { dcs; }; };
-        zone "3.168.192.in-addr.arpa" IN { type master; file "/var/cache/bind/3.168.192.in-addr.arpa_zone"; allow-update { key ddns-update; }; };
+        zone "2.168.192.in-addr.arpa" IN { type master; file "/var/lib/2.168.192.in-addr.arpa_zone"; allow-update { dcs; }; };
+        zone "3.168.192.in-addr.arpa" IN { type master; file "/var/lib/3.168.192.in-addr.arpa_zone"; allow-update { key ddns-update; }; };
         zone "5.168.192.in-addr.arpa" IN { type slave; masters { 192.168.5.4 key notify-update; }; file "/var/cache/bind/5.168.192.in-addr.arpa_zone"; };
         zone "6.168.192.in-addr.arpa" IN { type slave; masters { 192.168.5.4 key notify-update; }; file "/var/cache/bind/6.168.192.in-addr.arpa_zone"; };
       named.conf.options: |
@@ -139,23 +139,21 @@ persistence:
     enabled: true
     mountPath: /var/lib/bind
     retain: false
-    pvSize: 16M
-    pvcSize: 8M
+    size: 8M
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: dns
+    volumeName: dns-data
   persistentvolume-cache:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/cache/bind
     retain: false
-    pvSize: 16M
-    pvcSize: 8M
+    size: 8M
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: dns
+    volumeName: dns-ca
 
 resources:
   limits:
