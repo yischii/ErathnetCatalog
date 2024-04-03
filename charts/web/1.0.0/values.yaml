@@ -322,13 +322,6 @@ persistence:
     objectName: conf
     readOnly: true
     targetSelectAll: true
-    #  web:
-    #    web-erathnet:
-    #      mountPath: /etc/apache2/sites-enabled/
-    #      subPath: erathnet.conf
-    #    web-tinaerath:
-    #      mountPath: /etc/apache2/sites-enabled/
-    #      subPath: tinaerath.conf
     type: configmap
   persistentvolume-data:
     accessModes: ReadWriteOnce
