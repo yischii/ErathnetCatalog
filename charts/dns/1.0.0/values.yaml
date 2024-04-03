@@ -153,7 +153,7 @@ persistence:
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: dns-ca
+    volumeName: dns-cache
 
 resources:
   limits:
