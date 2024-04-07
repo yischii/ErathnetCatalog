@@ -520,7 +520,7 @@ persistence:
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: dns-data
+    volumeName: dhcp
 
 resources:
   limits:
