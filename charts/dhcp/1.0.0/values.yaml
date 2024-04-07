@@ -41,10 +41,8 @@ configmap:
         # Kubernetes cluster
         subnet 172.16.0.0 netmask 255.255.0.0 {
         }
+        
         # VLAN 10
-        subnet 10.1.1.0 netmask 255.255.255.0 {
-        }
-
         subnet 192.168.2.0 netmask 255.255.255.224 {
         }
 
@@ -582,13 +580,14 @@ workload:
                 - SETUID          
       initContainers:
         dhcp-init:
-          command: ["sh", "-c", "touch /var/lib/dhcp/dhcpd.leases; chgrp -R 101 /var/lib/dhcp/; chmod -R 770 /var/lib/dhcp/*"]
+          command: ["sh", "-c", "touch /var/lib/dhcp/dhcpd.leases; chgrp -R 101 /var/lib/dhcp/; chmod -R 770 /var/lib/dhcp"]
           enabled: true
           imageSelector: image-init
           securityContext:
             capabilities:
               add:
-                - ALL
+                - CHOWN
+                - DAC_OVERRIDE
           type: init
       dnsConfig:
         nameservers:
