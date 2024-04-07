@@ -231,6 +231,7 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - DAC_OVERRIDE
           type: init
     replicas: 1
     type: Deployment

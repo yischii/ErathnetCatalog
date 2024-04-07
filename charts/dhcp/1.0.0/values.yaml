@@ -589,6 +589,7 @@ workload:
             capabilities:
               add:
                 - CHOWN
+                - DAC_OVERRIDE
           type: init
       dnsConfig:
         nameservers:
