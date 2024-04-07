@@ -530,6 +530,24 @@ resources:
     ephemeral-storage: 32M
     memory: 32M
 
+securityContext:
+  container:
+    capabilities:
+      add:
+        - CHOWN
+        - DAC_OVERRIDE
+        - NET_RAW
+        - SETGID
+        - SETUID
+      readOnlyRootFilesystem: false
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+      PUID: 101
+      UMASK: "007"
+  pod:
+    fsGroup: 101
+
 service:
   dhcp:
     enabled: true
@@ -562,20 +580,6 @@ workload:
               enabled: false
             startup:
               enabled: false
-          securityContext:
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-                - NET_RAW
-                - SETGID
-                - SETUID
-            readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
-            PUID: 101
-            UMASK: "007"
       initContainers:
         dhcp-init:
           command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R 101:101 /var/lib/dhcp/*']
