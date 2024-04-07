@@ -486,10 +486,15 @@ global:
     "Tier": "Backend"
   }
 
-image:
+image-dhcp:
   pullPolicy: Always
   repository: yischi/dhcp
   tag: 1.0.0
+
+image-init:
+  pullPolicy: IfNotPresent
+  repository: busybox
+  tag: ""
 
 notes:
   footer: |
@@ -510,12 +515,12 @@ persistence:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/lib/dhcp/
-    size: 8M
     retain: false
+    size: 8M
     storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
-    volumeName: dhcp
+    volumeName: dns-data
 
 resources:
   limits:
@@ -548,7 +553,7 @@ workload:
       containers:
         dhcp:
           enabled: true
-          imageSelector: image
+          imageSelector: image-dhcp
           primary: true
           probes:
             liveness:
@@ -566,8 +571,19 @@ workload:
                 - SETGID
                 - SETUID
             readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
+            #runAsGroup: 0
+            #runAsNonRoot: false
+            #runAsUser: 0
+      initContainers:
+        dhcp-init:
+          enabled: true
+          imageSelector: image-init
+          command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R dhcpd:dhcpd /var/lib/dhcp/*']
+    dnsConfig:
+        nameservers:
+          - 192.168.2.1
+        searches:
+          - erathnet.de
+    hostname: home-dhcp
     replicas: 1
     type: Deployment

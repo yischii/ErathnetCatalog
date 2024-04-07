@@ -329,10 +329,9 @@ persistence:
     mountPath: /var/www/
     retain: false
     size: 1G
-    storageClassName: data-hdd
+    storageClassName: hostpath
     targetSelectAll: true
     type: pvc
-    volumeName: web
 
 resources:
   limits:
@@ -346,7 +345,7 @@ service:
   web:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      - 192.168.6.49
     ipFamilies:
       - IPv4
     primary: true
@@ -364,7 +363,7 @@ workload:
     primary: true
     podSpec:
       containers:
-        web-erathnet:
+        web:
           enabled: true
           imageSelector: image
           primary: true
