@@ -114,10 +114,15 @@ global:
     "Tier": "Backend"
   }
 
-image:
-  pullPolicy: Always
-  repository: yischi/dns
-  tag: 1.0.0
+image-dns:
+  pullPolicy: IfNotPresent
+  repository: ubuntu/bind9
+  tag: 9.18-22.04_beta
+
+image-init:
+  pullPolicy: IfNotPresent
+  repository: busybox
+  tag: stable
 
 notes:
   footer: |
@@ -140,20 +145,18 @@ persistence:
     mountPath: /var/cache/bind
     retain: false
     size: 8M
-    storageClassName: data-hdd
+    storageClassName: hostpath
     targetSelectAll: true
     type: pvc
-    volumeName: dns-cache
   persistentvolume-data:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/lib/bind
     retain: false
     size: 8M
-    storageClassName: data-hdd
+    storageClassName: hostpath
     targetSelectAll: true
     type: pvc
-    volumeName: dns-data
 
 resources:
   limits:
@@ -162,6 +165,16 @@ resources:
   requests:
     ephemeral-storage: 32M
     memory: 32M
+
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
+    runAsGroup: 0
+    runAsNonRoot: false
+    runAsUser: 0
+    UMASK: "007"
+  pod:
+    fsGroup: 101
 
 service:
   dns:
@@ -190,7 +203,7 @@ workload:
       containers:
         dns:
           enabled: true
-          imageSelector: image
+          imageSelector: image-dns
           primary: true
           probes:
             liveness:
@@ -207,9 +220,15 @@ workload:
                 - NET_RAW
                 - SETGID
                 - SETUID
-            readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
+      initContainers:
+        dns-init:
+          command: ["sh", "-c", "chgrp -R 101 /var/lib/bind; chgrp -R 101 /var/cache/bind; chmod -R 770 /var/lib/bind; chmod -R 770 /var/cache/bind"]
+          enabled: true
+          imageSelector: image-init
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+          type: init
     replicas: 1
     type: Deployment
