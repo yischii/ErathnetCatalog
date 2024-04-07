@@ -543,7 +543,6 @@ securityContext:
       runAsGroup: 0
       runAsNonRoot: false
       runAsUser: 0
-      PUID: 101
       UMASK: "007"
   pod:
     fsGroup: 101
