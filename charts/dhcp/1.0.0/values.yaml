@@ -582,7 +582,7 @@ workload:
                 - SETUID          
       initContainers:
         dhcp-init:
-          command: ["sh", "-c", "touch /var/lib/dhcp/dhcpd.leases; chgrp -R 101 /var/lib/dhcp/; chmod -R 770 /var/lib/dhcp"]
+          command: ["sh", "-c", "touch /var/lib/dhcp/dhcpd.leases; chgrp -R 101 /var/lib/dhcp/; chmod -R 770 /var/lib/dhcp/*"]
           enabled: true
           imageSelector: image-init
           securityContext:
