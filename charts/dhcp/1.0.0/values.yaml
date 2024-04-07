@@ -41,6 +41,8 @@ configmap:
         # Kubernetes cluster
         subnet 172.16.0.0 netmask 255.255.0.0 {
         }
+        subnet 10.1.0.0 netmask 255.255.0.0 {
+        }
         # VLAN 10
         subnet 10.1.1.0 netmask 255.255.255.0 {
         }
@@ -534,7 +536,7 @@ service:
   dhcp:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      "{{ .Values.network.ipAddress }}"
     ipFamilies:
       - IPv4
     primary: true
@@ -574,7 +576,6 @@ workload:
             runAsGroup: 0
             runAsNonRoot: false
             runAsUser: 0
-            UMASK: "007"
       initContainers:
         dhcp-init:
           command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R 101:101 /var/lib/dhcp/*']
@@ -595,7 +596,5 @@ workload:
         searches:
           - erathnet.de
       hostname: home-dhcp
-      replicas: 1
-      securityContext:
-        fsGroup: 101
-      type: Deployment
+    replicas: 1
+    type: Deployment
