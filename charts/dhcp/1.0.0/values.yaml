@@ -589,13 +589,13 @@ workload:
             runAsNonRoot: false
             runAsUser: 0
           type: init
-    dnsConfig:
+      dnsConfig:
         nameservers:
           - 192.168.2.1
         searches:
           - erathnet.de
-    hostname: home-dhcp
-    replicas: 1
-    securityContext:
-      fsGroup: 101
-    type: Deployment
+      hostname: home-dhcp
+      replicas: 1
+      securityContext:
+        fsGroup: 101
+      type: Deployment
