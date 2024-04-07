@@ -145,18 +145,20 @@ persistence:
     mountPath: /var/cache/bind
     retain: false
     size: 8M
-    storageClassName: hostpath
+    storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
+    volumeName: dns-cache
   persistentvolume-data:
     accessModes: ReadWriteOnce
     enabled: true
     mountPath: /var/lib/bind
     retain: false
     size: 8M
-    storageClassName: hostpath
+    storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
+    volumeName: dns-data
 
 resources:
   limits:

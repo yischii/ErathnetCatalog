@@ -41,8 +41,6 @@ configmap:
         # Kubernetes cluster
         subnet 172.16.0.0 netmask 255.255.0.0 {
         }
-        subnet 10.1.0.0 netmask 255.255.0.0 {
-        }
         # VLAN 10
         subnet 10.1.1.0 netmask 255.255.255.0 {
         }
@@ -519,9 +517,10 @@ persistence:
     mountPath: /var/lib/dhcp/
     retain: false
     size: 8M
-    storageClassName: hostpath
+    storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
+    volumeName: dhcp
 
 resources:
   limits:
