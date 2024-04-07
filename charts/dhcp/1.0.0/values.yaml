@@ -494,7 +494,7 @@ image-dhcp:
 image-init:
   pullPolicy: IfNotPresent
   repository: busybox
-  tag: ""
+  tag: stable
 
 notes:
   footer: |
@@ -534,7 +534,7 @@ service:
   dhcp:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      - 1.1.1.1
     ipFamilies:
       - IPv4
     primary: true
@@ -576,9 +576,10 @@ workload:
             #runAsUser: 0
       initContainers:
         dhcp-init:
+          command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R dhcpd:dhcpd /var/lib/dhcp/*']
           enabled: true
           imageSelector: image-init
-          command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R dhcpd:dhcpd /var/lib/dhcp/*']
+          type: init
     dnsConfig:
         nameservers:
           - 192.168.2.1
