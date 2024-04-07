@@ -588,8 +588,7 @@ workload:
           securityContext:
             capabilities:
               add:
-                - CHOWN
-                - DAC_OVERRIDE
+                - ALL
           type: init
       dnsConfig:
         nameservers:
