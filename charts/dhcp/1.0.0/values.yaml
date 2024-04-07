@@ -576,7 +576,7 @@ workload:
             #runAsUser: 0
       initContainers:
         dhcp-init:
-          command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R dhcpd:dhcpd /var/lib/dhcp/*']
+          command: ['sh', '-c', 'touch /var/lib/dhcp/dhcpd.leases; chown -R 101:101 /var/lib/dhcp/*']
           enabled: true
           imageSelector: image-init
           type: init
