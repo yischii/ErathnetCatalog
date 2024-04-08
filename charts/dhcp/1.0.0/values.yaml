@@ -588,11 +588,6 @@ workload:
               add:
                 - CHOWN
                 - DAC_OVERRIDE
-            readOnlyRootFilesystem: false
-            runAsGroup: 0
-            runAsNonRoot: false
-            runAsUser: 0
-            UMASK: "007"
           type: init
       dnsConfig:
         nameservers:
