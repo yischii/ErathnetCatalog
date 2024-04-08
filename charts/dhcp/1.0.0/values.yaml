@@ -577,18 +577,23 @@ workload:
                 - DAC_OVERRIDE
                 - NET_RAW
                 - SETGID
-                - SETUID          
-      #initContainers:
-      #  dhcp-init:
-      #    command: ["sh", "-c", "touch /var/lib/dhcp/dhcpd.leases; chgrp -R 101 /var/lib/dhcp/; chmod -R 770 /var/lib/dhcp"]
-      #    enabled: true
-      #    imageSelector: image-init
-      #    securityContext:
-      #      capabilities:
-      #        add:
-      #          - CHOWN
-      #          - DAC_OVERRIDE
-      #    type: init
+                - SETUID
+      initContainers:
+        dhcp-init:
+          command: ["sh", "-c", "touch /var/lib/dhcp/dhcpd.leases; chgrp -R 101 /var/lib/dhcp/; chmod -R 770 /var/lib/dhcp"]
+          enabled: true
+          imageSelector: image-init
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+            readOnlyRootFilesystem: false
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
+            UMASK: "007"
+          type: init
       dnsConfig:
         nameservers:
           - 192.168.2.1
