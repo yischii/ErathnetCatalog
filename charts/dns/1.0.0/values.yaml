@@ -25,24 +25,24 @@ configmap:
         include "/etc/bind/named.conf.local";
         include "/etc/bind/named.conf.default-zones";
       named.conf.default-zones: |
-        zone "." { type hint; file "/var/lib/db.root"; };
-        zone "localhost" { type master; file "/var/lib/db.local"; };
-        zone "127.in-addr.arpa" { type master; file "/var/lib/db.127"; };
-        zone "0.in-addr.arpa" { type master; file "/var/lib/db.0"; };
-        zone "255.in-addr.arpa" { type master; file "/var/lib/db.255"; };
+        zone "." { type hint; file "/var/lib/bind/db.root"; };
+        zone "localhost" { type master; file "/var/lib/bind/db.local"; };
+        zone "127.in-addr.arpa" { type master; file "/var/lib/bind/db.127"; };
+        zone "0.in-addr.arpa" { type master; file "/var/lib/bind/db.0"; };
+        zone "255.in-addr.arpa" { type master; file "/var/lib/bind/db.255"; };
       named.conf.local: |
         include "/etc/bind/ddns.key";
 
-        zone "erathnet.de" IN { type master; file "/var/lib/erathnet.de_zone"; allow-update { key ddns-update; dcs; }; };
-        zone "_msdcs.erathnet.de" IN { type master; file "/var/lib/_msdcs.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "_sites.erathnet.de" IN { type master; file "/var/lib/_sites.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "_tcp.erathnet.de" IN { type master; file "/var/lib/_tcp.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "_udp.erathnet.de" IN { type master; file "/var/lib/_udp.erathnet.de_zone"; allow-update { dcs; }; };
-        zone "stuttgart-hundepension.de" IN { type master; file "/var/lib/stuttgart-hundepension.de_zone"; };      
-        zone "tinaerath.de" IN { type master; file "/var/lib/tinaerath.de_zone"; };
-        zone "0.168.192.in-addr.arpa" IN { type master; file "/var/lib/0.168.192.in-addr.arpa_zone"; };
-        zone "2.168.192.in-addr.arpa" IN { type master; file "/var/lib/2.168.192.in-addr.arpa_zone"; allow-update { dcs; }; };
-        zone "3.168.192.in-addr.arpa" IN { type master; file "/var/lib/3.168.192.in-addr.arpa_zone"; allow-update { key ddns-update; }; };
+        zone "erathnet.de" IN { type master; file "/var/lib/bind/erathnet.de_zone"; allow-update { key ddns-update; dcs; }; };
+        zone "_msdcs.erathnet.de" IN { type master; file "/var/lib/bind/_msdcs.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "_sites.erathnet.de" IN { type master; file "/var/lib/bind/_sites.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "_tcp.erathnet.de" IN { type master; file "/var/lib/bind/_tcp.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "_udp.erathnet.de" IN { type master; file "/var/lib/bind/_udp.erathnet.de_zone"; allow-update { dcs; }; };
+        zone "stuttgart-hundepension.de" IN { type master; file "/var/lib/bind/stuttgart-hundepension.de_zone"; };      
+        zone "tinaerath.de" IN { type master; file "/var/lib/bind/tinaerath.de_zone"; };
+        zone "0.168.192.in-addr.arpa" IN { type master; file "/var/lib/bind/0.168.192.in-addr.arpa_zone"; };
+        zone "2.168.192.in-addr.arpa" IN { type master; file "/var/lib/bind/2.168.192.in-addr.arpa_zone"; allow-update { dcs; }; };
+        zone "3.168.192.in-addr.arpa" IN { type master; file "/var/lib/bind/3.168.192.in-addr.arpa_zone"; allow-update { key ddns-update; }; };
         zone "5.168.192.in-addr.arpa" IN { type slave; masters { 192.168.5.4 key notify-update; }; file "/var/cache/bind/5.168.192.in-addr.arpa_zone"; };
         zone "6.168.192.in-addr.arpa" IN { type slave; masters { 192.168.5.4 key notify-update; }; file "/var/cache/bind/6.168.192.in-addr.arpa_zone"; };
       named.conf.options: |
