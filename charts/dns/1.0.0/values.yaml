@@ -175,8 +175,6 @@ securityContext:
     runAsNonRoot: false
     runAsUser: 0
     UMASK: "007"
-  pod:
-    fsGroup: 101
 
 service:
   dns:
@@ -224,11 +222,7 @@ workload:
                 - SETUID
       initContainers:
         dns-init:
-          command: 
-            - ["chown", "-R", "101:101", "/var/lib/bind"]
-            - ["chmod", "-R", "770", "/var/lib/bind"]
-            - ["chown", "-R", "101:101", "/var/cache/bind"]
-            - ["chmod", "-R", "770", "/var/cache/bind"]
+          command: ["sh", "-c", "chown -R 101:101 /var/lib/bind; chmod -R 770 /var/lib/bind; chown -R 101:101 /var/cache/bind; chmod -R 770 /var/cache/bind"]
           enabled: true
           imageSelector: image-init
           securityContext:
@@ -236,8 +230,7 @@ workload:
               add:
                 - CHOWN
                 - DAC_OVERRIDE
-                - SETGID
-                - SETUID
+                - FOWNER
           type: init
     replicas: 1
     type: Deployment
