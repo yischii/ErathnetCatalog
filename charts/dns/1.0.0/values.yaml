@@ -177,7 +177,7 @@ securityContext:
     PUID: 0
     UMASK: "007"
   pod:
-    fsGroup: 101
+    fsGroup: 0
 
 service:
   dns:
