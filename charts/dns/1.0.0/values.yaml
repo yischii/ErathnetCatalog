@@ -22,8 +22,8 @@ configmap:
         include "/etc/bind/rndc.key";
         include "/etc/bind/named.conf.options";
         controls { inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; }; };
-        #include "/etc/bind/named.conf.local";
-        #include "/etc/bind/named.conf.default-zones";
+        include "/etc/bind/named.conf.local";
+        include "/etc/bind/named.conf.default-zones";
       named.conf.default-zones: |
         zone "." { type hint; file "/var/lib/db.root"; };
         zone "localhost" { type master; file "/var/lib/db.local"; };
