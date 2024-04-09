@@ -1,8 +1,30 @@
 groups:
+  - name: Certificate
+    description: Certificate configuration for Web server
   - name: Network
-    description: Network configuration for DHCP server
+    description: Network configuration for Web server
 
 questions:
+  - variable: certificate
+    label: Certificate configuration for Web server
+    group: Certificate
+    schema:
+      type: dict
+      attrs:
+        - variable: certificates
+          label: Certificates for Web server
+          description: Select certificates for Web server
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: certificateEntry
+                label: Certificate
+                schema:
+                type: int
+                $ref:
+                  - "definitions/certificate"
+                
   - variable: network
     label: Network configuration for DHCP server
     group: Network

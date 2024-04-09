@@ -345,7 +345,7 @@ service:
   web:
     enabled: true
     externalIPs:
-      - 192.168.6.49
+      - "{{ .Values.network.ipAddress }}"
     ipFamilies:
       - IPv4
     primary: true
