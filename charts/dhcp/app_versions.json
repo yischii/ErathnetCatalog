@@ -21,6 +21,10 @@
                     "description": "DHCP is able to bypass file permissions."
                 },
                 {
+                    "name": "FOWNER",
+                    "description": "DHCP is able to bypass permission checks for it's sub-processes."
+                },
+                {
                     "name": "NET_RAW",
                     "description": "DHCP is able to use raw sockets."
                 },
@@ -88,21 +92,21 @@
             "groups": [
                 {
                     "name": "Network",
-                    "description": "Network configuration for DHCP server"
+                    "description": "Network configuration for DHCP Server"
                 }
             ],
             "questions": [
                 {
                     "variable": "network",
-                    "label": "Network configuration for DHCP server",
+                    "label": "Network configuration for DHCP Server",
                     "group": "Network",
                     "schema": {
                         "type": "dict",
                         "attrs": [
                             {
                                 "variable": "ipAddress",
-                                "label": "IP address for DHCP server",
-                                "description": "Define the ip address for DHCP server",
+                                "label": "IP address for DHCP Server",
+                                "description": "Define the ip address for DHCP Server",
                                 "schema": {
                                     "type": "ipaddr",
                                     "required": "true"

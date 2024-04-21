@@ -31,8 +31,8 @@
                 "https://github.com/truenas/charts"
             ],
             "tags": [
-                "DHCP",
-                "Network"
+                "ISC DHCP Server",
+                "DHCP"
             ],
             "title": "DHCP Server"
         },
@@ -67,8 +67,8 @@
                 "https://github.com/truenas/charts"
             ],
             "tags": [
-                "DNS",
-                "Network"
+                "BIND9 DNS Server",
+                "DNS"
             ],
             "title": "DNS Server"
         },
@@ -103,6 +103,7 @@
                 "https://github.com/truenas/charts"
             ],
             "tags": [
+                "Apache Web Server",
                 "Web"
             ],
             "title": "Web Server"

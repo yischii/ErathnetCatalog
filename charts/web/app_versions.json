@@ -111,11 +111,12 @@
                                     "default": [],
                                     "items": [
                                         {
-                                            "variable": "certificateEntry",
+                                            "variable": "certificateID",
                                             "label": "Certificate for web server",
                                             "description": "Select certificate for web server",
                                             "schema":{
                                                 "type": "int",
+                                                "required": "true",
                                                 "$ref": [
                                                     "definitions/certificate"
                                                 ]

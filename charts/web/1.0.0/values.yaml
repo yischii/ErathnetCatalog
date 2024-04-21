@@ -178,8 +178,8 @@ configmap:
             SSLProxyCheckPeerName Off
 
             SSLEngine on
-            SSLCertificateFile      /etc/letsencrypt/live/www.erathnet.de/fullchain.pem
-            SSLCertificateKeyFile   /etc/letsencrypt/live/www.erathnet.de/privkey.pem
+            SSLCertificateFile      /etc/ssl/erathnet.de/certificate.pem
+            SSLCertificateKeyFile   /etc/ssl/erathnet.de/key.pem
 
             Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains;"
             <FilesMatch "\.(cgi|shtml|phtml|php)$">
@@ -252,7 +252,7 @@ configmap:
             SSLProxyCheckPeerName Off
 
             SSLEngine on
-            SSLCertificateFile      /etc/letsencrypt/live/www.erathnet.de/fullchain.pem
+            SSLCertificateFile      /etc/ssl/erathnet.de/fullchain.pem
             SSLCertificateKeyFile   /etc/letsencrypt/live/www.erathnet.de/privkey.pem
     
             Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains;"
@@ -316,6 +316,16 @@ notes:
     If you find a bug in this chart, please send an e-mail to sebastian@erathnet.de
 
 persistence:
+  certificate-conf:
+    enabled: true
+    items:
+      - key: tls.crt
+        path: cert.pem
+      - key: tls.key
+        path: key.pem
+    mountPath: /etc/ssl/"{{ .Values.certificate.certificates.certificateName }}"
+    objectName: "{{ .Values.certificate.certificates.certificateName }}"-certificate
+    type: secret
   configmap-conf:
     enabled: true
     mountPath: /etc/apache2/sites-enabled/
@@ -340,6 +350,11 @@ resources:
   requests:
     ephemeral-storage: 32M
     memory: 32M
+
+scaleCertificate:
+  "{{ .Values.certificate.certificates.certificateName }}"-certificate:
+    enabled: true
+    id: "{{ .Values.certificate.certificates.certificateID }}"
 
 service:
   web:
