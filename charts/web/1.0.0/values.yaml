@@ -324,7 +324,7 @@ persistence:
       - key: tls.key
         path: key.pem
     mountPath: /etc/ssl/"{{ .Values.certificate.certificates.certificateName }}"
-    objectName: "{{ .Values.certificate.certificates.certificateName }}"-certificate
+    objectName: web-certificate
     type: secret
   configmap-conf:
     enabled: true
@@ -352,7 +352,7 @@ resources:
     memory: 32M
 
 scaleCertificate:
-  "{{ .Values.certificate.certificates.certificateName }}"-certificate:
+  web-certificate:
     enabled: true
     id: "{{ .Values.certificate.certificates.certificateID }}"
 

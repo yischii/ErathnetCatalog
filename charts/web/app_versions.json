@@ -111,10 +111,19 @@
                                     "default": [],
                                     "items": [
                                         {
+                                            "variable": "certificateName",
+                                            "label": "Certificate Name",
+                                            "description": "Define the certificate name for web server",
+                                            "schema": {
+                                                "type": "string",
+                                                "required": "true"
+                                            }
+                                        },
+                                        {
                                             "variable": "certificateID",
                                             "label": "Certificate for web server",
                                             "description": "Select certificate for web server",
-                                            "schema":{
+                                            "schema": {
                                                 "type": "int",
                                                 "required": "true",
                                                 "$ref": [
