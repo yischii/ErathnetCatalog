@@ -323,7 +323,7 @@ persistence:
         path: cert.pem
       - key: tls.key
         path: key.pem
-    mountPath: /etc/ssl/"{{ .Values.certificate.certificates.certificateName }}"
+    mountPath: /etc/ssl/{{ .Values.certificate.certificates.certificateName }}
     objectName: web-certificate
     type: secret
   configmap-conf:
@@ -354,13 +354,13 @@ resources:
 scaleCertificate:
   web-certificate:
     enabled: true
-    id: "{{ .Values.certificate.certificates.certificateID }}"
+    id: {{ .Values.certificate.certificates.certificateID }}
 
 service:
   web:
     enabled: true
     externalIPs:
-      - "{{ .Values.network.ipAddress }}"
+      - {{ .Values.network.ipAddress }}
     ipFamilies:
       - IPv4
     primary: true
