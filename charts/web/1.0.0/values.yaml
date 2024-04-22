@@ -351,10 +351,10 @@ resources:
     ephemeral-storage: 32M
     memory: 32M
 
-scaleCertificate:
-  certificate:
-    enabled: true
-    id: {{ .Values.certificate.certificateID }}
+#scaleCertificate:
+#  certificate:
+#    enabled: true
+#    id: {{ .Values.certificate.certificateID }}
 
 service:
   web:
