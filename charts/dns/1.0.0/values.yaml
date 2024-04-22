@@ -165,7 +165,7 @@ service:
   dns:
     enabled: true
     externalIPs:
-      - {{ .Values.network.ipAddress }}
+      - "{{ .Values.network.ipAddress }}"
     ipFamilies:
       - IPv4
     primary: true
