@@ -11,27 +11,14 @@ questions:
     schema:
       type: dict
       attrs:
-        - variable: certificates
+        - variable: certificateID
           label: Certificates for web server
           description: Select certificates for web server
           schema:
-            type: list
-            default: []
-            items:
-              - variable: certificateName
-                label: Certificate Name
-                description: Define the certificate name for web server
-                schema:
-                  type: string
-                  required: true
-              - variable: certificateID
-                label: Certificate
-                description: Select certificate for web server
-                schema:
-                  type: int
-                  required: true
-                  $ref:
-                    - "definitions/certificate"
+            type: int
+            required: true
+            $ref:
+              - "definitions/certificate"
                 
   - variable: network
     label: Network configuration for web server
