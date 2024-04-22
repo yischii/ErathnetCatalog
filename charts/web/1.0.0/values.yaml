@@ -354,7 +354,7 @@ resources:
 scaleCertificate:
   certificate:
     enabled: true
-    id: 1
+    id: "{{ .Values.certificate.certificateID }}"
 
 service:
   web:

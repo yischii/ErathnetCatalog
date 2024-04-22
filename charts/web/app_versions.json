@@ -99,43 +99,23 @@
                     "variable": "certificate",
                     "label": "Certificate configuration for web server",
                     "group": "Certificate",
-                    "schema":{
+                    "schema": {
                         "type":"dict",
-                        "attrs":[
+                        "attrs": [
                             {
-                                "variable": "certificates",
-                                "label": "Certificates for web server",
-                                "description": "Select certificates for web server",
-                                "schema":{
-                                    "type": "list",
-                                    "default": [],
-                                    "items": [
-                                        {
-                                            "variable": "certificateName",
-                                            "label": "Certificate Name",
-                                            "description": "Define the certificate name for web server",
-                                            "schema": {
-                                                "type": "string",
-                                                "required": "true"
-                                            }
-                                        },
-                                        {
-                                            "variable": "certificateID",
-                                            "label": "Certificate for web server",
-                                            "description": "Select certificate for web server",
-                                            "schema": {
-                                                "type": "int",
-                                                "required": "true",
-                                                "$ref": [
-                                                    "definitions/certificate"
-                                                ]
-                                            }
-                                        }
+                                "variable": "certificateID",
+                                "label": "Certificate for web server",
+                                "description": "Select certificate for web server",
+                                "schema": {
+                                    "type": "int",
+                                    "required": "true",
+                                    "$ref": [
+                                        "definitions/certificate"
                                     ]
-
                                 }
                             }
                         ]
+
                     }
                 },
                 {
