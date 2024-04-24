@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- define "cert-bot.configuration" -}}
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -5835,3 +5837,5 @@ webhooks:
         name: cert-manager-webhook
         namespace: cert-manager
         path: /validate
+
+{{- end -}}
