@@ -1,0 +1,27 @@
+global:
+  annotations: {
+    "App": "Cert-Bot",
+    "Environment": "Production",
+    "Release": "Stable",
+    "Service": "Certificate",
+    "Tier": "Backend"
+  }      
+
+notes:
+  footer: |
+    # Documentation
+    Documentation for this chart can be found at https://github.com/yischii/ErathnetCatalog
+    # Bug reports
+    If you find a bug in this chart, please send an e-mail to sebastian@erathnet.de
+
+resources:
+  limits:
+    ephemeral-storage: 64M
+    memory: 64M
+  requests:
+    ephemeral-storage: 32M
+    memory: 32M
+
+securityContext:
+  container:
+    readOnlyRootFilesystem: false

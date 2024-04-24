@@ -308,6 +308,11 @@ image:
   repository: php
   tag: 8.2.17-apache
 
+image-init:
+  pullPolicy: IfNotPresent
+  repository: busybox
+  tag: stable
+
 notes:
   footer: |
     # Documentation
@@ -339,9 +344,10 @@ persistence:
     mountPath: /var/www/
     retain: false
     size: 1G
-    storageClassName: hostpath
+    storageClassName: data-hdd
     targetSelectAll: true
     type: pvc
+    volumeName: web
 
 resources:
   limits:
@@ -351,10 +357,9 @@ resources:
     ephemeral-storage: 32M
     memory: 32M
 
-#scaleCertificate:
-#  certificate:
-#    enabled: true
-#    id: {{ .Values.certificate.certificateID }}
+securityContext:
+  container:
+    readOnlyRootFilesystem: false
 
 service:
   web:
@@ -389,7 +394,23 @@ workload:
               enabled: false
             startup:
               enabled: false
-          securityContext:
-            readOnlyRootFilesystem: false
+      dnsConfig:
+        nameservers:
+          - 192.168.2.2
+        searcher:
+          - erathnet.de
+      hostname: home-web
+      initContainers:
+        web-init:
+          command: ["sh", "-c", "chown -R 568:568 /var/www/; chmod -R 750 /var/www"]
+          enabled: true
+          imageSelector: image-init
+          securityContect:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - FOWNER
+          type: init
     replicas: 1
     type: Deployment

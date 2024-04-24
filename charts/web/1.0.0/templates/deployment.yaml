@@ -1,5 +1,1 @@
-{{- include "ix.v1.common.loader.init" . -}}
-
-{{- $_ := mustMergeOverwrite .Values (include "web.certificate" $ | fromYaml) -}}
-
-{{- include "ix.v1.common.loader.apply" . -}}
+{{- include "ix.v1.common.loader.all" . -}}

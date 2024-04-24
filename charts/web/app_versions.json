@@ -43,7 +43,7 @@
                 "Tier": "Backend"
             },
             "apiVersion": "v2",
-            "app_readme": "<h1>Apache Web Server/h1>",
+            "app_readme": "<h1>Apache Web Server</h1>",
             "appVersion": "2024.3.01",
             "dependencies": [
                 {
