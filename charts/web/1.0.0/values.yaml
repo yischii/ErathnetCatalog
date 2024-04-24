@@ -364,21 +364,17 @@ securityContext:
 service:
   web:
     enabled: true
-    externalIPs:
-      - "{{ .Values.network.ipAddress }}"
-    ipFamilies:
-      - IPv4
     primary: true
     ports:
       http:
         enabled: true
         primary: true
-        port: 30100
+        port: 80
         protocol: http
         targetPort: 80
 
 workload:
-  web:
+  web-erathnet:
     enabled: true
     primary: true
     podSpec:
